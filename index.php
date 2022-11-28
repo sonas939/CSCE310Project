@@ -75,7 +75,7 @@
 	
    <body>
       
-      <h2>Welcome to Build-A-Bread</h2>
+      <h2>Welcome to Build-A-Bread</h2> 
       <div class = "container form-signin">
          
          <?php
@@ -89,11 +89,20 @@
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = 'User310';
                   
-                  echo 'You have entered valid user name and password';
+                  echo 'You have entered valid use name and password';
+                  
+                  header("Location: profile.php");
 
-                  // redirect to profile page
-                  header("Location: /profile.php");
-               }else {
+               } else if ($_POST['username'] == 'Admin310' && $_POST['password'] == '1234') {
+                  $_SESSION['valid'] = true;
+                  $_SESSION['timeout'] = time();
+                  $_SESSION['username'] = 'Admin310';
+                  
+                  echo 'You have entered valid use name and password';
+                  
+                  header("Location: admin.php");
+
+               } else {
                   $msg = 'Wrong username or password';
                }
             } elseif (isset($_POST['create_account'])) {
@@ -110,20 +119,21 @@
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "username" placeholder = "username = User310" autofocus></br>
+               name = "username" placeholder = "username = User310" 
+               required autofocus></br>
             <input type = "password" class = "form-control"
-               name = "password" placeholder = "password = 1234">
+               name = "password" placeholder = "password = 1234" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
-               name = "login">Login</button></br>
+               name = "login">Login</button>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-               name = "create_account">Create Account</button>
+               name = "create_account">Create Account</button> 
          </form>
 			
          <a href = "logout.php" tite = "Logout">Log Out</a>
          
       </div> 
-      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" />
-      <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" />
+      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
+      <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
 
    </body>
 </html>
