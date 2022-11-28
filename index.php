@@ -75,7 +75,7 @@
 	
    <body>
       
-      <h2>Welcome to Build-A-Bread</h2> 
+      <h2>Welcome to Build-A-Bread</h2>
       <div class = "container form-signin">
          
          <?php
@@ -89,10 +89,16 @@
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = 'User310';
                   
-                  echo 'You have entered valid use name and password';
+                  echo 'You have entered valid user name and password';
+
+                  // redirect to profile page
+                  header("Location: /profile.php");
                }else {
                   $msg = 'Wrong username or password';
                }
+            } elseif (isset($_POST['create_account'])) {
+               // redirect to create account
+               header("Location: /create_account_front.php");
             }
          ?>
       </div> <!-- /container -->
@@ -104,12 +110,13 @@
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "username" placeholder = "username = User310" 
-               required autofocus></br>
+               name = "username" placeholder = "username = User310" autofocus></br>
             <input type = "password" class = "form-control"
-               name = "password" placeholder = "password = 1234" required>
+               name = "password" placeholder = "password = 1234">
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
-               name = "login">Login</button>
+               name = "login">Login</button></br>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+               name = "create_account">Create Account</button>
          </form>
 			
          <a href = "logout.php" tite = "Logout">Log Out</a>
