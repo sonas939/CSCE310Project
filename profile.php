@@ -74,7 +74,7 @@
   $db_host = 'localhost';
   $db_user = 'root';
   $db_password = 'root';
-  $db_db = 'information_schema';
+  $db_db = "build_a_bread";
   $db_port = 8889;
 
   $mysqli = new mysqli(
