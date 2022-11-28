@@ -27,75 +27,27 @@
     </div>
   </nav>
 
-  <?php
-  session_start();
-  $uname = $_SESSION['username'];
-  // Function to create a sql connection.
-  function getDB() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="build_a_bread";
-    // Create a DB connection
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error . "\n");
-    }
-    return $conn;
-  }
-
-  // create a connection
-  $conn = getDB();
-
-  // Sql query to authenticate the user
-  $sql = "SELECT profile_id, first_name, last_name, username, password, email, phone_number
-          FROM profiles
-          WHERE username= '$uname'";
-  if (!$result = $conn->query($sql)) {
-    die('There was an error running the query [' . $conn->error . ']\n');
-  }
-
-  /* convert the select return result into array type */
-  $return_arr = array();
-  while($row = $result->fetch_assoc()){
-    array_push($return_arr, $row);
-  }
-
-  /* convert the array type to json format and read out*/
-  $json_str = json_encode($return_arr);
-  $json_a = json_decode($json_str, true);
-  $id = $json_a[0]['profile_id'];
-  $f_name = $json_a[0]['first_name'];
-  $l_name = $json_a[0]['last_name'];
-  $u_name = $json_a[0]['username'];
-  $pwd = $json_a[0]['password'];
-  $email = $json_a[0]['email'];
-  $phone_num = $json_a[0]['phone_number'];
-  ?>
-
   <div class="container  col-lg-4 col-lg-offset-4 text-center" style="padding-top: 50px; text-align: center;">
     <?php
-    session_start();
-    $name=$_SESSION["username"];
-    echo "<h2><b>$name's Profile Edit</b></h1><hr><br>";
+    echo "<h2><b>Create Account</b></h1><hr><br>";
     ?>
-    <form action="create_account_back.php" method="post">
+    <form method="POST" action="create_account_back.php">
       <div class="form-group row">
         <label for="FirstName" class="col-sm-4 col-form-label">FirstName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="FirstName" required <?php echo "value=$FirstName";?> >
+          <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="FirstName" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="LastName" class="col-sm-4 col-form-label">LastName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="LastName" name="LastName" placeholder="LastName" required <?php echo "value=$LastName";?> >
+          <input type="text" class="form-control" id="LastName" name="LastName" placeholder="LastName" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="UserName" class="col-sm-4 col-form-label">UserName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName" required <?php echo "value=$UserName";?> >
+          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName" required>
         </div>
       </div>
       <div class="form-group row">
@@ -107,13 +59,13 @@
       <div class="form-group row">
         <label for="Email" class="col-sm-4 col-form-label">Email</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required <?php echo "value=$Email";?>>
+          <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="PhoneNumber" class="col-sm-4 col-form-label">Phone Number</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="PhoneNumber" required <?php echo "value=$PhoneNumber";?>>
+          <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="PhoneNumber" required>
         </div>
       </div>
       <br>
