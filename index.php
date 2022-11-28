@@ -93,8 +93,7 @@
                   
                   header("Location: profile.php");
 
-               }
-               else if ($_POST['username'] == 'Admin310' && $_POST['password'] == '1234') {
+               } else if ($_POST['username'] == 'Admin310' && $_POST['password'] == '1234') {
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = 'Admin310';
@@ -103,9 +102,12 @@
                   
                   header("Location: admin.php");
 
-               }else {
+               } else {
                   $msg = 'Wrong username or password';
                }
+            } elseif (isset($_POST['create_account'])) {
+               // redirect to create account
+               header("Location: /create_account_front.php");
             }
          ?>
       </div> <!-- /container -->
@@ -123,6 +125,8 @@
                name = "password" placeholder = "password = 1234" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+               name = "create_account">Create Account</button> 
          </form>
 			
          <a href = "logout.php" tite = "Logout">Log Out</a>
