@@ -90,6 +90,19 @@
                   $_SESSION['username'] = 'User310';
                   
                   echo 'You have entered valid use name and password';
+                  
+                  header("Location: profile.php");
+
+               }
+               else if ($_POST['username'] == 'Admin310' && $_POST['password'] == '1234') {
+                  $_SESSION['valid'] = true;
+                  $_SESSION['timeout'] = time();
+                  $_SESSION['username'] = 'Admin310';
+                  
+                  echo 'You have entered valid use name and password';
+                  
+                  header("Location: admin.php");
+
                }else {
                   $msg = 'Wrong username or password';
                }
@@ -115,8 +128,8 @@
          <a href = "logout.php" tite = "Logout">Log Out</a>
          
       </div> 
-      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" />
-      <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" />
+      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
+      <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
 
    </body>
 </html>
