@@ -1,47 +1,53 @@
 <title>Build A Bread</title>
 
-<style type="text/css">
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .9em;
-        color: #000000;
-        background-color: #FFFFFF;
-        margin: 0;
-        padding: 10px 20px 20px 20px;
-    }
+<head>
 
-    samp {
-        font-size: 1.3em;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    a {
-        color: #000000;
-        background-color: #FFFFFF;
-    }
+    <!--
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: .9em;
+            color: #000000;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 10px 20px 20px 20px;
+        }
 
-    sup a {
-        text-decoration: none;
-    }
+        samp {
+            font-size: 1.3em;
+        }
 
-    hr {
-        margin-left: 90px;
-        height: 1px;
-        color: #000000;
-        background-color: #000000;
-        border: none;
-    }
+        a {
+            color: #000000;
+            background-color: #FFFFFF;
+        }
 
-    #logo {
-        margin-bottom: 10px;
-        margin-left: 28px;
-    }
+        sup a {
+            text-decoration: none;
+        }
 
-    .text {
-        width: 80%;
-        margin-left: 90px;
-        line-height: 140%;
-    }
-</style>
+        hr {
+            margin-left: 90px;
+            height: 1px;
+            color: #000000;
+            background-color: #000000;
+            border: none;
+        }
+
+        #logo {
+            margin-bottom: 10px;
+            margin-left: 28px;
+        }
+
+        .text {
+            width: 80%;
+            margin-left: 90px;
+            line-height: 140%;
+        }
+    </style>
+    -->
 
 </head>
 
@@ -63,6 +69,72 @@
             <br>
             <a href=https://docs.google.com/spreadsheets/d/1DZ1idOCHZVBv5lmVg7m1fGqC-GKAzfz8uhBbppXkuN8/edit#gid=0>Users</a>
             <br><br>
+            
+            <?php
+              function getDB() {
+                $dbhost="localhost";
+                $dbuser="root";
+                $dbpass="root";
+                $dbname="build_a_bread";
+            
+                // Create a DB connection
+                $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+                if ($conn->connect_error) {
+                  die("Connection failed: " . $conn->connect_error . "\n");
+                }
+                
+                return $conn;
+              }
+
+              // connect to db and query profile information
+              $conn = getDB();
+              $sql = "SELECT profile_id, first_name, last_name, username, email, phone_number, user_type FROM profiles";
+              $res = $conn->query($sql);
+
+              // begin profile table
+              echo '<div class="container table-responsive">';
+              echo '<table class="table table-bordered">';
+              echo '<thead>';
+              echo "<tr>";
+              echo "<th>" . "Profile ID" . "</th>";
+              echo "<th>" . "First Name" . "</th>";
+              echo "<th>" . "Last Name" . "</th>";
+              echo "<th>" . "Username" . "</th>";
+              echo "<th>" . "Email" . "</th>";
+              echo "<th>" . "Phone Number" . "</th>";
+              echo "</tr>";
+              echo '</thead>';
+              echo '<tbody>';
+
+              // iterate through each profile, determine account type, display in table
+              while ($row = mysqli_fetch_array($res)) {
+                // all admins must be employees
+                $isEmp = false;
+                $isAdmin = false;
+                if ($row['user_type'] == 1) {
+                    $isEmp = true;
+                    $isAdmin = false;
+                } elseif ($row['user_type'] == 2) {
+                    $isEmp = true;
+                    $isAdmin = true;
+                }
+
+                echo "<tr>";
+                echo "<td>" . $row['profile_id'] . "</td>";
+                echo "<td>" . $row['first_name'] . "</td>";
+                echo "<td>" . $row['last_name'] . "</td>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['phone_number'] . "</td>";
+                echo "</tr>";
+              }
+
+              // end profile table
+              echo "</tbody></table></div>";
+
+              $conn->close();
+            ?>
+
             <hr style="margin-left: 0px">
             <br>
             <a href=https://calendar.google.com/calendar>Schedule</a>
@@ -76,36 +148,7 @@
             <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 2</a><br>
             <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 3</a><br>
         </div>
-    </div>
-
-    
-
-<?php
-  // establish connection to SQL database
-  $db_host = 'localhost';
-  $db_user = 'root';
-  $db_password = 'root';
-  $db_db = 'information_schema';
-  $db_port = 8889;
-
-  $mysqli = new mysqli(
-    $db_host,
-    $db_user,
-    $db_password,
-    $db_db
-  );
-	
-  if ($mysqli->connect_error) {
-    echo 'Errno: '.$mysqli->connect_errno;
-    echo '<br>';
-    echo 'Error: '.$mysqli->connect_error;
-    exit();
-  }
-
-  echo 'Success: A proper connection to MySQL was made.';
-
-  $mysqli->close();
-?>
+    </div> 
 
 </body>
 </html>
