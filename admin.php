@@ -70,6 +70,7 @@
             <a href=https://docs.google.com/spreadsheets/d/1DZ1idOCHZVBv5lmVg7m1fGqC-GKAzfz8uhBbppXkuN8/edit#gid=0>Users</a>
             <br><br>
             
+            <!-- Written by Nathan Groeschel -->
             <?php
               function getDB() {
                 $dbhost="localhost";
@@ -134,6 +135,7 @@
 
               $conn->close();
             ?>
+            <!-- End Code from Nathan Groeschel -->
 
             <hr style="margin-left: 0px">
             <br>

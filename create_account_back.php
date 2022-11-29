@@ -2,6 +2,7 @@
 <html>
 <body>
 
+  <!-- Written by Nathan Groeschel -->
   <?php
   session_start();
 
@@ -43,6 +44,7 @@
     header("Location: create_account_front.php");
   }
   ?>
+  <!-- End Code from Nathan Groeschel -->
 
 </body>
 </html>

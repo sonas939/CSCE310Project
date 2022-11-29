@@ -12,6 +12,7 @@
   <title>Create Account</title>
 </head>
 
+<!-- Written by Nathan Groeschel -->
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #3EA055;">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -83,4 +84,6 @@
   }
   </script>
 </body>
+<!-- End Code from Nathan Groeschel -->
+
 </html>
