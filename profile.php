@@ -84,7 +84,7 @@
     <div style="width: 100%;">
         <div style="width: 50%; height: 100%; float: left; border-style: solid; border-width: 2px; text-align: center"> 
             <h1>Profile</h1>
-            <?php echo "<h2>User Name: $input_uname ExampleUser </h2>"; ?>
+            <?php echo "<h2>User Name: $input_uname</h2>"; ?>
             <h2>Password: <?php echo $input_pwd; ?> </h2>
             <h2>Name: <?php echo $input_fname; ?> <?php echo $input_lname; ?> </h2>
             <h2>Email: <?php echo $input_email; ?> </h2>
@@ -94,6 +94,7 @@
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                 name = "edit_account">Edit Account</button> 
             </form>
+            <a href = "logout.php" tite = "Logout">Log Out</a>
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center"> 
             <br>
