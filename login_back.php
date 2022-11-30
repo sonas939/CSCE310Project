@@ -26,7 +26,7 @@
   }
 
 
-
+  //gets username and password
   $input_uname= $_GET['username'];
   $input_pwd = $_GET['password'];
   $usertype = 0;
@@ -35,25 +35,37 @@
 
 
   $conn = getDB();
-//  $sql = "SELECT * FROM `profiles` WHERE username = \"nathan\" AND password = \"12345\";";
   $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
-  $result = $conn->query($sql);
-  if(true){
-    
-    echo "<h2><b> WE INCreate Account</b></h1><hr><br>";
-  }
-  if($result->num_rows != 0){
-    
-    echo "<h2><b> NOT Zero</b></h1><hr><br>";
-    echo "<h2><b> $input_uname</b></h1><hr><br>";
-    echo "<h2><b> $input_pwd</b></h1><hr><br>";
+  $result = $conn->query($sql); 
+
+  echo "<h2><b> Log In Limbo </b></h1><hr><br>";
+
+  if($result->num_rows == 1){
+
+    $_SESSION['user_type'] = (string)$result->fetch_assoc()['user_type'];
+    $_SESSION['profile_id'] = $result->fetch_assoc()['profile_id'];
+
+    echo $_SESSION['user_type']; 
+    echo $_SESSION['profile_id']; 
+
+    if(isset($_SESSION['user_type']) && $_SESSION['user_type'] =='3'){  //if admin
+      $conn->close();
+      header("Location: admin.php");
+    }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
+      $conn->close();
+      header("Location: profile.php");
+    }else{
+      $conn->close();
+      echo "<h2><b>usertype error</b></h1><hr><br>";   
+      header('Refresh: 1; URL = logout.php');  
+    }
+  
   }
   if($result->num_rows == 0){
-    
-    echo "<h2><b> ZERO</b></h1><hr><br>";
-    echo "<h2><b> $input_uname</b></h1><hr><br>";
-    echo "<h2><b> $input_pwd</b></h1><hr><br>";
-    
+    $conn->close();
+    echo "<h2><b>FAILED LOG IN</b></h1><hr><br>";   
+    header('Refresh: 1; URL = logout.php');
+
   }
 
   // if ($result->num_rows == 1) {  // login successful
