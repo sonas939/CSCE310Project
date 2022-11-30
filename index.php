@@ -65,7 +65,7 @@
             border-color:#017572;
          }
          
-         h2{
+         h1{
             text-align: center;
             color: #017572;
          }
@@ -74,41 +74,13 @@
    </head>
 	
    <body>
-      
-      <h2>Welcome to Build-A-Bread</h2> 
+      <h1>Welcome to Build-A-Bread</h1> 
       <div class = "container form-signin">
          
          <?php
-         echo "BREAD";
             $msg = '';
             
-            if (isset($_POST['login']) && !empty($_POST['username']) 
-               && !empty($_POST['password'])) {
-               
-                  header("/login_back.php");
-               
-               if ($_POST['username'] == 'User310' && $_POST['password'] == '1234') {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'User310';
-                  
-                  echo 'You have entered valid use name and password';
-                  
-                  header("Location: profile.php");
-
-               } else if ($_POST['username'] == 'Admin310' && $_POST['password'] == '1234') {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'Admin310';
-                  
-                  echo 'You have entered valid use name and password';
-                  
-                  header("Location: admin.php");
-
-               } else {
-                  $msg = 'Wrong username or password';
-               }
-            } elseif (isset($_POST['create_account'])) {
+            if (isset($_POST['create_account'])) {
                // redirect to create account
                header("Location: /create_account_front.php");
             }
@@ -121,40 +93,34 @@
       
       <div class = "container">
       
-         <form class = "form-signin" role = "form" 
-            action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); 
-            ?>" method = "post">
-            <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
-            <input type = "text" class = "form-control" 
-               name = "username" placeholder = "username = User310" 
-               required autofocus></br>
-            <input type = "password" class = "form-control"
-               name = "password" placeholder = "password = 1234" required>
-            <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
-               name = "login">Login</button>
-            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+         <!-- log in form START -->
+         <form class = "form-signin" action="/login_back.php">
+         <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
+         <!-- <label for="username">username:</label> -->
+         <input type="text" id="username" name="username" class = "form-control" placeholder = "Username:" Required><br>
+         <!-- <label for="password">password:</label> -->
+         <input type="password" id="password" name="password" class = "form-control" placeholder = "Password:" Required>
+         <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "login">Login</button>
+            
+         </form>
+         <!-- log in form END -->
+      
+         <!-- Edit and Create accounts: -->
+         <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+         <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                name = "create_account">Create Account</button> 
-            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-               name = "edit_account">Edit Account</button> 
+         <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+            name = "edit_account">Edit Account</button> 
          </form>
-			
-
-         <!-- log in form -->
-         <h1>Log In Here</h1>
-         <form action="/login_back.php">
-         <label for="username">username:</label>
-         <input type="text" id="username" name="username"><br><br>
-         <label for="password">password:</label>
-         <input type="text" id="password" name="password"><br><br>
-         <input type="submit" value="Submit">
-         </form>
-
 
          <a href = "logout.php" tite = "Logout">Log Out</a>
          
       </div> 
       <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
       <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
+      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
+      <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
+      <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
 
    </body>
 </html>
