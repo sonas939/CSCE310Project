@@ -65,7 +65,7 @@
             border-color:#017572;
          }
          
-         h2{
+         h1{
             text-align: center;
             color: #017572;
          }
@@ -74,7 +74,7 @@
    </head>
 	
    <body>
-      <h2>Welcome to Build-A-Bread</h2> 
+      <h1>Welcome to Build-A-Bread</h1> 
       <div class = "container form-signin">
          
          <?php
