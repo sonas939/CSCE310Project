@@ -40,9 +40,10 @@
     $result_row = $result->fetch_assoc();
     $_SESSION['profile_id'] = $result_row['profile_id'];
     $_SESSION['user_type'] = $result_row['user_type'];
+    $_SESSION['editor_id'] = $result_row['profile_id'];     //to access which user to edit
 
     print_r($_SESSION);
-    
+
     if(isset($_SESSION['user_type']) && $_SESSION['user_type'] =='3'){  //if admin
       $conn->close();
       header('Location: admin.php');

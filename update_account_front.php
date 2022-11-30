@@ -35,45 +35,29 @@ function getDB() {
 
 
 //gets username and password
-// $input_uname= $_GET['username'];
-// $input_pwd = $_GET['password'];
+$input_profile_id = $_SESSION['profile_id'];
 // $usertype = 0;
 
-echo $_SESSION['profile_id'];
+echo $_SESSION['editor_id'];
 
 
-// $conn = getDB();
-// $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
-// $result = $conn->query($sql); 
-
+$conn = getDB();
+$sql = "SELECT * FROM `profiles` WHERE profile_id = \"$input_profile_id\";";
+$result = $conn->query($sql); 
+$result_row = $result->fetch_assoc();
 echo "<h2><b> PHP Update Area </b></h1><hr><br>";
 
-// if($result->num_rows == 1){
+$new_profile_id = $result_row['profile_id'];
+$new_first_name = $result_row['first_name'];
+$new_last_name = $result_row['last_name'];
+$new_username = $result_row['username'];
+$new_password = $result_row['password'];
+$new_email = $result_row['email'];
+$new_phone_number = $result_row['phone_number'];
+$new_user_type = $result_row['user_type'];
 
-//   $_SESSION['user_type'] = (string)$result->fetch_assoc()['user_type'];
-//   $_SESSION['profile_id'] = $result->fetch_assoc()['profile_id'];
-
-//   echo $_SESSION['user_type']; 
-//   echo $_SESSION['profile_id']; 
-
-//   if(isset($_SESSION['user_type']) && $_SESSION['user_type'] =='3'){  //if admin
-//     $conn->close();
-//     header("Location: admin.php");
-//   }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
-//     $conn->close();
-//     header("Location: profile.php");
-//   }else{
-//     $conn->close();
-//     echo "<h2><b>usertype error</b></h1><hr><br>";   
-//     header('Refresh: 1; URL = logout.php');  
-//   }
-// }
-// if($result->num_rows == 0){                                             // LOG IN FAILED
-//   $conn->close();
-//   echo "<h2><b>FAILED LOG IN</b></h1><hr><br>";   
-//   header('Refresh: 1; URL = logout.php');
-
-// }
+//echo $_SESSION['new_last_name'];
+print_r($_SESSION);
 
 ?>
 
@@ -97,39 +81,45 @@ echo "<h2><b> PHP Update Area </b></h1><hr><br>";
     ?>
     <form method="POST" action="update_account_back.php">
       <div class="form-group row">
-        <label for="FirstName" class="col-sm-4 col-form-label">FirstName</label>
+        <?php echo "<label for=\"FirstName\" class=\"col-sm-4 col-form-label\">FirstName</label>"; ?>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="FirstName" required>
+          <?php echo "<input type=\"text\" class=\"form-control\" id=\"FirstName\" name=\"FirstName\" placeholder=\"$new_first_name\">"; ?>
         </div>
       </div>
       <div class="form-group row">
         <label for="LastName" class="col-sm-4 col-form-label">LastName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="LastName" name="LastName" placeholder="LastName" required>
+          <?php echo "<input type=\"text\" class=\"form-control\" id=\"LastName\" name=\"LastName\" placeholder=\"$new_last_name\">";?>
         </div>
       </div>
       <div class="form-group row">
         <label for="UserName" class="col-sm-4 col-form-label">UserName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName" required>
+          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName">
         </div>
       </div>
       <div class="form-group row">
         <label for="Password" class="col-sm-4 col-form-label">Password</label>
         <div class="col-sm-8">
-          <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
+          <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Confirm Password" class="col-sm-4 col-form-label">Confirm Password</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" id="Confirm_Password" name="Confirm_Password" placeholder="Confirm_Password">
         </div>
       </div>
       <div class="form-group row">
         <label for="Email" class="col-sm-4 col-form-label">Email</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required>
+          <?php echo "<input type=\"text\" class=\"form-control\" id=\"Email\" name=\"Email\" placeholder=\"$new_email\">";?>
         </div>
       </div>
       <div class="form-group row">
         <label for="PhoneNumber" class="col-sm-4 col-form-label">Phone Number</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="PhoneNumber" required>
+          <?php echo "<input type=\"text\" class=\"form-control\" id=\"PhoneNumber\" name=\"PhoneNumber\" placeholder=\"$new_phone_number\">";?>
         </div>
       </div>
       <br>
