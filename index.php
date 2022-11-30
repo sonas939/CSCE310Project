@@ -79,11 +79,14 @@
       <div class = "container form-signin">
          
          <?php
+         echo "BREAD";
             $msg = '';
             
             if (isset($_POST['login']) && !empty($_POST['username']) 
                && !empty($_POST['password'])) {
-				
+               
+                  header("/login_back.php");
+               
                if ($_POST['username'] == 'User310' && $_POST['password'] == '1234') {
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
@@ -109,6 +112,10 @@
                // redirect to create account
                header("Location: /create_account_front.php");
             }
+            elseif (isset($_POST['edit_account'])) {
+               // redirect to create account
+               header("Location: /update_account_front.php");
+            }         
          ?>
       </div> <!-- /container -->
       
@@ -127,8 +134,22 @@
                name = "login">Login</button>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                name = "create_account">Create Account</button> 
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+               name = "edit_account">Edit Account</button> 
          </form>
 			
+
+         <!-- log in form -->
+         <h1>Log In Here</h1>
+         <form action="/login_back.php">
+         <label for="username">username:</label>
+         <input type="text" id="username" name="username"><br><br>
+         <label for="password">password:</label>
+         <input type="text" id="password" name="password"><br><br>
+         <input type="submit" value="Submit">
+         </form>
+
+
          <a href = "logout.php" tite = "Logout">Log Out</a>
          
       </div> 
