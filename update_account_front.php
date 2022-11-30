@@ -95,7 +95,7 @@ print_r($_SESSION);
       <div class="form-group row">
         <label for="UserName" class="col-sm-4 col-form-label">UserName</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName">
+          <?php echo "<input type=\"text\" class=\"form-control\" id=\"UserName\" name=\"UserName\" placeholder=\"$new_username\">";?>
         </div>
       </div>
       <div class="form-group row">
