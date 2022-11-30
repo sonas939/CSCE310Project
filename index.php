@@ -79,6 +79,7 @@
       <div class = "container form-signin">
          
          <?php
+         echo "BREAD";
             $msg = '';
             
             if (isset($_POST['login']) && !empty($_POST['username']) 
@@ -113,7 +114,7 @@
             }
             elseif (isset($_POST['edit_account'])) {
                // redirect to create account
-               header("Location: /login_back.php");
+               header("Location: /update_account_front.php");
             }         
          ?>
       </div> <!-- /container -->
@@ -139,7 +140,7 @@
 			
 
          <!-- log in form -->
-         <h1>The form action attribute</h1>
+         <h1>Log In Here</h1>
          <form action="/login_back.php">
          <label for="username">username:</label>
          <input type="text" id="username" name="username"><br><br>
@@ -148,8 +149,6 @@
          <input type="submit" value="Submit">
          </form>
 
-         <p>Click the "Submit" button and the form-data will be sent to a page on the 
-         server called "action_page.php".</p>
 
          <a href = "logout.php" tite = "Logout">Log Out</a>
          

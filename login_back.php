@@ -2,11 +2,8 @@
 <html>
 <body>
 
-  <!-- Written by Nathan Groeschel and Nathanael Goza -->
+  <!-- Written by Nathanael Goza and Nathan Groeschel -->
   <?php
-//    echo "<h2><b>Create Account</b></h1><hr><br>";
-    //header("Location: profile.php");
-//    echo "<h2><b> WE INCreate Account</b></h1><hr><br>";
 
   session_start();
 
@@ -37,20 +34,21 @@
   $conn = getDB();
   $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
   $result = $conn->query($sql); 
-
   echo "<h2><b> Log In Limbo </b></h1><hr><br>";
 
   if($result->num_rows == 1){
+    $result_row = $result->fetch_assoc();
+    $_SESSION['profile_id'] = $result_row['user_type'];
+    $_SESSION['user_type'] = $result_row['user_type'];
 
-    $_SESSION['user_type'] = (string)$result->fetch_assoc()['user_type'];
-    $_SESSION['profile_id'] = $result->fetch_assoc()['profile_id'];
-
+    print_r($_SESSION);
     echo $_SESSION['user_type']; 
+    echo "mid";
     echo $_SESSION['profile_id']; 
 
     if(isset($_SESSION['user_type']) && $_SESSION['user_type'] =='3'){  //if admin
       $conn->close();
-      header("Location: admin.php");
+      header('Location: admin.php');
     }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
       $conn->close();
       header("Location: profile.php");
@@ -59,26 +57,16 @@
       echo "<h2><b>usertype error</b></h1><hr><br>";   
       header('Refresh: 1; URL = logout.php');  
     }
-  
   }
-  if($result->num_rows == 0){
+  if($result->num_rows == 0){                                             // LOG IN FAILED
     $conn->close();
     echo "<h2><b>FAILED LOG IN</b></h1><hr><br>";   
     header('Refresh: 1; URL = logout.php');
 
   }
 
-  // if ($result->num_rows == 1) {  // login successful
-  //   echo 'Nice ';
-  // }
-  // else{  // failed login go back to start
-  //   // return to login page
-  //   $conn->close();
-  //   echo 'Log In Failed';
-  //   header("Location: index.php");
-  // } 
   ?>
-  <!-- End Code from Nathan Groeschel -->
+  <!-- End Code from Nathanael Goza -->
 
 </body>
 </html>
