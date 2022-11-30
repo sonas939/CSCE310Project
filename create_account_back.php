@@ -31,6 +31,16 @@
 
   $conn = getDB();
 
+  // validate username
+  $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\";";
+  $results = $conn->query($sql);
+  if($results->num_rows != 0){
+    echo "Username already in use.\n";
+    $conn->close();
+    echo 'Account Creation Failed.';
+    header('Refresh: 2; URL = create_account_front.php');
+  }
+
   $sql = "INSERT INTO profiles(profile_id, first_name, last_name, username, password, email, phone_number, user_type)
           VALUES (UUID(), '$input_fname', '$input_lname', '$input_uname', '$input_pwd', '$input_email', $input_phonenum, $usertype)";
 
