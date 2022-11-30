@@ -38,14 +38,11 @@
 
   if($result->num_rows == 1){
     $result_row = $result->fetch_assoc();
-    $_SESSION['profile_id'] = $result_row['user_type'];
+    $_SESSION['profile_id'] = $result_row['profile_id'];
     $_SESSION['user_type'] = $result_row['user_type'];
 
     print_r($_SESSION);
-    echo $_SESSION['user_type']; 
-    echo "mid";
-    echo $_SESSION['profile_id']; 
-
+    
     if(isset($_SESSION['user_type']) && $_SESSION['user_type'] =='3'){  //if admin
       $conn->close();
       header('Location: admin.php');
