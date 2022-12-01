@@ -204,8 +204,8 @@
                 }
 
                 # clear post and refresh
-                # $_POST = array();
-                # header("Location: admin.php");
+                $_POST = array();
+                header("Location: admin.php");
               }
 
               $conn->close();
