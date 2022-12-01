@@ -180,7 +180,7 @@
 
               // end profile table
               echo "</tbody></table></div>";
-              echo '<button class="btn btn-primary btn-block" type="submit" name="update">Update</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" id="update" name="update">Update</button>';
               echo '</form>';
 
               if (isset($_POST['update'])) {
