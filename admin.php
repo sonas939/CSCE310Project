@@ -166,14 +166,14 @@
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 if ($row['user_type'] == 2) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 } elseif ($row['user_type'] == 3) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . " checked></td>";
                 } else {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . "></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 }
                 echo "</tr>";
               }
