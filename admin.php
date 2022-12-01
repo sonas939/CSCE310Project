@@ -121,7 +121,7 @@
               $res = $conn->query($sql);
 
               // begin profile table
-              echo '<form method="post">';
+              echo '<form action="admin.php" method="post">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
