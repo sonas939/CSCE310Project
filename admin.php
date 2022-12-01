@@ -116,11 +116,12 @@
             <?php
               // connect to db and query profile information
               $conn = getDB();
-              $sql = "SELECT profile_id, first_name, last_name, username, email, phone_number, user_type FROM profiles";
+              // use view_profiles view
+              $sql = "SELECT * FROM view_profiles";
               $res = $conn->query($sql);
 
               // begin profile table
-              echo '<form method="post" action="admin.php">';
+              echo '<form method="post">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
@@ -179,30 +180,32 @@
 
               // end profile table
               echo "</tbody></table></div>";
-
-              echo '<button class = "btn btn-primary btn-block" type = "submit" name = "update">Update</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" name="update">Update</button>';
               echo '</form>';
 
               if (isset($_POST['update'])) {
                 foreach ($uIDs as $id) {
                     if (isset($_POST[$id . '-ADM'])) {
                         # user is admin
+                        print("here ");
                         $sql = "UPDATE profiles SET user_type=3 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } elseif (isset($_POST[$id . '-EMP'])) {
                         # user is employee
+                        print("there ");
                         $sql = "UPDATE profiles SET user_type=2 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } else {
                         # user is customer
+                        print("everywhere ");
                         $sql = "UPDATE profiles SET user_type=1 WHERE profile_id='$id'";
                         $conn->query($sql);
                     }
                 }
 
                 # clear post and refresh
-                $_POST = array();
-                header("Location: admin.php");
+                # $_POST = array();
+                # header("Location: admin.php");
               }
 
               $conn->close();
