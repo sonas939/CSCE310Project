@@ -76,7 +76,7 @@
               $conn = getDB();
               $sql = "SELECT * FROM `view_schedules`";
               /*CREATE VIEW `view_schedules` AS
-	                SELECT order_id, start_time, end_time, A.order_status
+	                SELECT A.order_id, start_time, end_time, A.order_status
 		            FROM `orders` A, `schedules` B
 		            WHERE A.order_id = B.order_id
             */
