@@ -55,7 +55,7 @@
         <div style="height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
             
-            <!-- Written by John Grimes (adapted from Nathan Groeschel) -->
+            <!-- Written by John Grimes -->
             <?php
               function getDB() {
                 $dbhost="localhost";
@@ -89,8 +89,8 @@
               echo '<thead>';
               echo "<tr>";
               echo "<th>" . "Order ID" . "</th>";
-              echo "<th>" . "Start Time" . "</th>";
-              echo "<th>" . "End Time" . "</th>";
+              echo "<th>" . "Pickup Start Time" . "</th>";
+              echo "<th>" . "Pickup End Time" . "</th>";
               echo "<th>" . "Status" . "</th>";
               echo "</tr>";
               echo '</thead>';
@@ -106,9 +106,15 @@
 
                 echo "<tr>";
                 echo "<td>" . $row['order_id'] . "</td>";
-                echo "<td>" . $row['start_time'] . "</td>";
-                echo "<td>" . $row['end_time'] . "</td>";
-                echo "<td>" . $row['order_status'] . "</td>";
+                echo "<td>" . date("m/d/y g:i A", strtotime($row['start_time'])) . "</td>";
+                echo "<td>" . date("m/d/y g:i A", strtotime($row['end_time'])) . "</td>";
+                if ($row['order_status'] == 1) {
+                    echo "<td>" . 'In Progress'. "</td>";
+                } elseif ($row['order_status'] == 2) {
+                    echo "<td>" . 'Fulfilled'. "</td>";
+                } else {
+                    echo "<td>" . 'Canceled'. "</td>";
+                }
                 echo "</tr>";
               }
 
@@ -118,7 +124,7 @@
 
               $conn->close();
             ?>
-            <!-- End Code from John Grimes (adapted from Nathan Groeschel) -->
+            <!-- End Code from John Grimes -->
         </div>
     </div> 
 

@@ -86,7 +86,7 @@
               echo "<th>" . "Price (\$USD)" . "</th>";
               echo "<th>" . "Name" . "</th>";
               echo "<th>" . "Description" . "</th>";
-              echo "<th>" . "Delete?" . "</th>";
+              echo "<th>" . "Remove?" . "</th>";
               echo "</tr>";
               echo '</thead>';
               echo '<tbody>';
@@ -99,19 +99,25 @@
 
                 array_push($items, $row['item_id']);
 
-                echo "<tr>";
-                echo "<td>" . $row['item_id'] . "</td>";
-                echo "<td>" . $row['item_inventory'] . "</td>";
-                echo "<td>" . $row['item_price'] . "</td>";
-                echo "<td>" . $row['item_name'] . "</td>";
-                echo "<td>" . $row['item_description'] . "</td>";
-                echo "<td>" . '<input type="checkbox" name='. $delete . "></td>";
-                echo "</tr>";
+                if ($row['item_description'] == "No longer available")
+                
+                    ;
+                else{
+                    echo "<tr>";
+                    echo "<td>" . $row['item_id'] . "</td>";
+                    echo "<td>" . $row['item_inventory'] . "</td>";
+                    echo "<td>" . $row['item_price'] . "</td>";
+                    echo "<td>" . $row['item_name'] . "</td>";
+                    echo "<td>" . $row['item_description'] . "</td>";
+                    echo "<td>" . $row['item_description'] . "</td>";
+                    echo "<td>" . '<input type="checkbox" name='. $delete . "></td>";
+                    echo "</tr>";
+                }
               }
 
               // end item table
               echo "</tbody></table></div>";
-              echo '<button class="btn btn-primary btn-block" type="submit" name="remove">Remove</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" name="remove" value="remove">Remove</button>';
               echo '</form>';
 
               if (isset($_POST['remove'])) {
@@ -119,8 +125,6 @@
                     if (isset($_POST[$item . '-DEL'])) {
                         # if item marked to be deleted
                         print("test ");
-                        $sql = "UPDATE items SET item_inventory=0 WHERE item_id = '$item'";
-                        $conn->query($sql);
                         $sql = "UPDATE items SET item_description='No longer available' WHERE item_id = '$item'";
                         $conn->query($sql);
                     }

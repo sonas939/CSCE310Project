@@ -96,13 +96,19 @@
 
                 array_push($uIDs, $row['item_id']);
 
-                echo "<tr>";
-                echo "<td>" . $row['item_id'] . "</td>";
-                echo "<td>" . $row['item_inventory'] . "</td>";
-                echo "<td>" . $row['item_price'] . "</td>";
-                echo "<td>" . $row['item_name'] . "</td>";
-                echo "<td>" . $row['item_description'] . "</td>";
-                echo "</tr>";
+                if ($row['item_description'] == "No longer available")
+                    ;
+                else{
+                    echo "<tr>";
+                    echo "<td>" . $row['item_id'] . "</td>";
+                    echo "<td>" . $row['item_inventory'] . "</td>";
+                    echo "<td>" . $row['item_price'] . "</td>";
+                    echo "<td>" . $row['item_name'] . "</td>";
+                    echo "<td>" . $row['item_description'] . "</td>";
+                    echo "<td>" . $row['item_description'] . "</td>";
+                    echo "<td>" . '<input type="checkbox" name='. $delete . "></td>";
+                    echo "</tr>";
+                }
               }
 
               // end item table
