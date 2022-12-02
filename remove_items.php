@@ -69,6 +69,10 @@
                 
                 return $conn;
               }
+              if (isset($_POST['back'])) {
+                // redirect to create account
+                header("Location: /items.php");
+            } 
 
               // connect to db and query all our items
               $conn = getDB();
@@ -133,6 +137,10 @@
               }
               $conn->close();
             ?>
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "back">Return to Inventory</button> 
+            </form>
             <!-- End Code from John Grimes -->
         </div>
     </div>
