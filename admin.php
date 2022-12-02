@@ -69,6 +69,14 @@
             
             return $conn;
         }
+
+        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
+            if ($_SESSION["user_type"] != 3) {
+                header("Location: profile.php");
+            }
+        } else {
+            header("Location: index.php");
+        }
          
         $profile_id = $_SESSION["profile_id"];
 
@@ -166,21 +174,21 @@
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 if ($row['user_type'] == 2) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 } elseif ($row['user_type'] == 3) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . " checked></td>";
                 } else {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . "></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 }
                 echo "</tr>";
               }
 
               // end profile table
               echo "</tbody></table></div>";
-              echo '<button class="btn btn-primary btn-block" type="submit" name="update">Update</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" id="update" name="update">Update</button>';
               echo '</form>';
 
               if (isset($_POST['update'])) {
