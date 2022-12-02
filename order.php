@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Order Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <?php
@@ -19,22 +20,30 @@
         <h2 class="text-center">Menu</h2>
         </div>
         <div class="row">
-        <?php 
-            $sql = "SELECT * FROM `Items`"; 
-            $result = mysqli_query($conn, $sql);
-            while($row = mysqli_fetch_assoc($result)){
-                $name = $row['item_name'];
-                $price = $row['item_price'];
-                $desc = $row['item_description'];
-                echo '<div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">'.$name.'</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">'.$price.'</h6>
-                        <p class="card-text">'.$desc.'</p>
-                        </div>
-                    </div>';
-                }
-        ?>
+            <div class="col">
+                <h3>Shopping Cart</h3>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                <?php 
+                    $sql = "SELECT * FROM `Items`"; 
+                    $result = $conn->query($sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        $name = $row['item_name'];
+                        $price = $row['item_price'];
+                        $desc = $row['item_description'];
+                        echo '<div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">'.$name.'</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">'.'$'.$price.'</h6>
+                                <p class="card-text">'.$desc.'</p>
+                                <button type="button" class="btn btn-secondary">Add to Cart</button>
+                                </div>
+                            </div>';
+                        }
+                ?>
+                </div>
+            </div>
         </div>
     </div>
 
