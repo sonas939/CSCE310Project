@@ -67,7 +67,7 @@
         $profile_id = $_SESSION["profile_id"];
 
         $conn = getDB();
-        $sql = "SELECT * FROM `profiles` WHERE profile_id = \"$profile_id\";";
+        $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
         $results = $conn->query($sql)->fetch_assoc();
         $input_fname = $results['first_name'];
         $input_lname = $results['last_name'];
