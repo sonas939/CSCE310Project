@@ -105,7 +105,7 @@
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
-            <a href=https://docs.google.com/spreadsheets/d/1RsYp0lhijPvCDGcKKTwpQUXf-3DnYO5zugFXKhKfFVw/edit#gid=0>Inventory</a>
+            <a href=items.php>Inventory</a>
             <br><br>
             <hr style="margin-left: 0px">
             <br>
@@ -214,10 +214,10 @@
 
             <hr style="margin-left: 0px">
             <br>
-            <a href=https://calendar.google.com/calendar>Schedule</a>
+            <a href=schedule.php>Schedule</a>
             <br><br>
             <hr style="margin-left: 0px">
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>Order Now</a>
+            <a href=order.php>Order Now</a>
             <br><br>
             <hr style="margin-left: 0px">
             <h1>Order History</h1>
