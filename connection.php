@@ -2,7 +2,16 @@
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "root";
-    $db = "build-a-bread";
-    $dbport = 8000;
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("Connect failed: %s\n". $conn -> error);
+    $db = "build_a_bread";
+
+    $conn = @new mysqli(
+        $dbhost,
+        $dbuser,
+        $dbpass,
+        $db
+    );
+        
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $conn->connect_error . "\n");
+    }
 ?>

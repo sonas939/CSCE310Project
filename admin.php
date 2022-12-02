@@ -52,18 +52,60 @@
 </head>
 
 <body>
+    <?php
+        session_start();
+        
+        function getDB() {
+            $dbhost="localhost";
+            $dbuser="root";
+            $dbpass="root";
+            $dbname="build_a_bread";
+        
+            // Create a DB connection
+            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+            if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error . "\n");
+            }
+            
+            return $conn;
+        }
+         
+        $profile_id = $_SESSION["profile_id"];
+
+        $conn = getDB();
+        $sql = "SELECT * FROM `profiles` WHERE profile_id = \"$profile_id\";";
+        $results = $conn->query($sql)->fetch_assoc();
+        $input_fname = $results['first_name'];
+        $input_lname = $results['last_name'];
+        $input_uname = $results['username'];
+        $input_pwd = $results['password'];
+        $input_email = $results['email'];
+        $input_phonenum = $results['phone_number'];
+
+        if (isset($_POST['edit_account'])) {
+            // redirect to create account
+            header("Location: /update_account_front.php");
+        }         
+    ?>
+
     <div style="width: 100%;">
         <div style="width: 50%; height: 100%; float: left; border-style: solid; border-width: 2px; text-align: center"> 
             <h1>Admin Profile</h1>
-            <h2>User Name: ExampleAdmin <a href=>Edit</a></h2>
-            <h2>Password: ******** <a href=>Edit</a></h2>
-            <h2>Name: Matt Smith <a href=>Edit</a></h2>
-            <h2>Email: myadmin@buildabread.com <a href=>Edit</a></h2>
-            <h2>Phone Number: 999-846-6459 <a href=>Edit</a></h2>
+            <?php echo "<h2>User Name: $input_uname</h2>"; ?>
+            <h2>Password: <?php echo $input_pwd; ?> </h2>
+            <h2>Name: <?php echo $input_fname; ?> <?php echo $input_lname; ?> </h2>
+            <h2>Email: <?php echo $input_email; ?> </h2>
+            <h2>Phone Number: <?php echo $input_phonenum; ?> </h2>
+            <!-- Edit and Create accounts: -->
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "edit_account">Edit Account</button> 
+            </form>
+            <a href = "logout.php" tite = "Logout">Log Out</a>
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
-            <a href=https://docs.google.com/spreadsheets/d/1RsYp0lhijPvCDGcKKTwpQUXf-3DnYO5zugFXKhKfFVw/edit#gid=0>Inventory</a>
+            <a href=items.php>Inventory</a>
             <br><br>
             <hr style="margin-left: 0px">
             <br>
@@ -72,28 +114,14 @@
             
             <!-- Written by Nathan Groeschel -->
             <?php
-              function getDB() {
-                $dbhost="localhost";
-                $dbuser="root";
-                $dbpass="root";
-                $dbname="build_a_bread";
-            
-                // Create a DB connection
-                $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error . "\n");
-                }
-                
-                return $conn;
-              }
-
               // connect to db and query profile information
               $conn = getDB();
-              $sql = "SELECT profile_id, first_name, last_name, username, email, phone_number, user_type FROM profiles";
+              // use view_profiles view
+              $sql = "SELECT * FROM view_profiles";
               $res = $conn->query($sql);
 
               // begin profile table
-              echo '<form method="post" action="admin.php">';
+              echo '<form action="admin.php" method="post">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
@@ -152,22 +180,24 @@
 
               // end profile table
               echo "</tbody></table></div>";
-
-              echo '<button class = "btn btn-primary btn-block" type = "submit" name = "update">Update</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" name="update">Update</button>';
               echo '</form>';
 
               if (isset($_POST['update'])) {
                 foreach ($uIDs as $id) {
                     if (isset($_POST[$id . '-ADM'])) {
                         # user is admin
+                        print("here ");
                         $sql = "UPDATE profiles SET user_type=3 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } elseif (isset($_POST[$id . '-EMP'])) {
                         # user is employee
+                        print("there ");
                         $sql = "UPDATE profiles SET user_type=2 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } else {
                         # user is customer
+                        print("everywhere ");
                         $sql = "UPDATE profiles SET user_type=1 WHERE profile_id='$id'";
                         $conn->query($sql);
                     }
@@ -184,10 +214,10 @@
 
             <hr style="margin-left: 0px">
             <br>
-            <a href=https://calendar.google.com/calendar>Schedule</a>
+            <a href=schedule.php>Schedule</a>
             <br><br>
             <hr style="margin-left: 0px">
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>Order Now</a>
+            <a href=order.php>Order Now</a>
             <br><br>
             <hr style="margin-left: 0px">
             <h1>Order History</h1>
