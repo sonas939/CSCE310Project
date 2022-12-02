@@ -105,8 +105,6 @@
                     echo "<td>" . $row['item_price'] . "</td>";
                     echo "<td>" . $row['item_name'] . "</td>";
                     echo "<td>" . $row['item_description'] . "</td>";
-                    echo "<td>" . $row['item_description'] . "</td>";
-                    echo "<td>" . '<input type="checkbox" name='. $delete . "></td>";
                     echo "</tr>";
                 }
               }

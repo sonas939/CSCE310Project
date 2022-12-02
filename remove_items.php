@@ -76,7 +76,7 @@
               $res = $conn->query($sql);
 
               // begin item table
-              echo '<form action="items.php" method="post">';
+              echo '<form action="remove_items.php" method="post">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
@@ -99,18 +99,15 @@
 
                 array_push($items, $row['item_id']);
 
-                if ($row['item_description'] == "No longer available")
+                if ($row['item_description'] != "No longer available"){
                 
-                    ;
-                else{
                     echo "<tr>";
                     echo "<td>" . $row['item_id'] . "</td>";
                     echo "<td>" . $row['item_inventory'] . "</td>";
                     echo "<td>" . $row['item_price'] . "</td>";
                     echo "<td>" . $row['item_name'] . "</td>";
                     echo "<td>" . $row['item_description'] . "</td>";
-                    echo "<td>" . $row['item_description'] . "</td>";
-                    echo "<td>" . '<input type="checkbox" name='. $delete . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='.$delete.' name='. $delete . "></td>";
                     echo "</tr>";
                 }
               }
@@ -132,7 +129,7 @@
 
                 # clear post and refresh
                 $_POST = array();
-                header("Location: items.php");
+                header("Location: remove_items.php");
               }
               $conn->close();
             ?>
