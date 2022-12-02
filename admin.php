@@ -69,6 +69,14 @@
             
             return $conn;
         }
+
+        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
+            if ($_SESSION["user_type"] != 3) {
+                header("Location: profile.php");
+            }
+        } else {
+            header("Location: index.php");
+        }
          
         $profile_id = $_SESSION["profile_id"];
 
