@@ -3,6 +3,8 @@
 <body>
 
   <!-- Written by Nathanael Goza and Nathan Groeschel -->
+
+  <!-- CREATE VIEW `view_login` AS SELECT username, password, profile_id, user_type FROM profiles; -->
   <?php
 
   session_start();
@@ -32,7 +34,7 @@
 
 
   $conn = getDB();
-  $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
+  $sql = "SELECT * FROM `view_login` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
   $result = $conn->query($sql); 
   echo "<h2><b> Log In Limbo </b></h1><hr><br>";
 
