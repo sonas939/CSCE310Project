@@ -74,7 +74,12 @@
 
               // connect to db and query profile information
               $conn = getDB();
-              $sql = "SELECT * FROM `schedules`";
+              $sql = "SELECT * FROM `view_schedules`";
+              /*CREATE VIEW `view_schedules` AS
+	                SELECT order_id, start_time, end_time, A.order_status
+		            FROM `orders` A, `schedules` B
+		            WHERE A.order_id = B.order_id
+            */
               $res = $conn->query($sql);
 
               // begin profile table
@@ -83,10 +88,10 @@
               echo '<table class="table table-bordered">';
               echo '<thead>';
               echo "<tr>";
-              echo "<th>" . "Schedule_ID" . "</th>";
-              echo "<th>" . "Order_ID" . "</th>";
+              echo "<th>" . "Order ID" . "</th>";
               echo "<th>" . "Start Time" . "</th>";
               echo "<th>" . "End Time" . "</th>";
+              echo "<th>" . "Status" . "</th>";
               echo "</tr>";
               echo '</thead>';
               echo '<tbody>';
@@ -97,13 +102,13 @@
               while ($row = mysqli_fetch_array($res)) {
                 // all admins must be employees
 
-                array_push($uIDs, $row['schedule_id']);
+                array_push($uIDs, $row['order_id']);
 
                 echo "<tr>";
-                echo "<td>" . $row['schedule_id'] . "</td>";
                 echo "<td>" . $row['order_id'] . "</td>";
                 echo "<td>" . $row['start_time'] . "</td>";
                 echo "<td>" . $row['end_time'] . "</td>";
+                echo "<td>" . $row['order_status'] . "</td>";
                 echo "</tr>";
               }
 
