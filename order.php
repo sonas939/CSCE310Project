@@ -20,22 +20,30 @@
         <h2 class="text-center">Menu</h2>
         </div>
         <div class="row">
-        <?php 
-            $sql = "SELECT * FROM `Items`"; 
-            $result = $conn->query($sql);
-            while($row = mysqli_fetch_assoc($result)){
-                $name = $row['item_name'];
-                $price = $row['item_price'];
-                $desc = $row['item_description'];
-                echo '<div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">'.$name.'</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">'.'$'.$price.'</h6>
-                        <p class="card-text">'.$desc.'</p>
-                        </div>
-                    </div>';
-                }
-        ?>
+            <div class="col">
+                <h3>Shopping Cart</h3>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                <?php 
+                    $sql = "SELECT * FROM `Items`"; 
+                    $result = $conn->query($sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        $name = $row['item_name'];
+                        $price = $row['item_price'];
+                        $desc = $row['item_description'];
+                        echo '<div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">'.$name.'</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">'.'$'.$price.'</h6>
+                                <p class="card-text">'.$desc.'</p>
+                                <button type="button" class="btn btn-secondary">Add to Cart</button>
+                                </div>
+                            </div>';
+                        }
+                ?>
+                </div>
+            </div>
         </div>
     </div>
 
