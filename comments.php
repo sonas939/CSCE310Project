@@ -54,7 +54,7 @@
             /* 
              * add comment to database
              * $sql = "INSERT INTO comments(comment_id, order_id, comment_field)
-             *         VALUES (UUID(), UUID(), '$comment')";
+             *         VALUES (UUID(), '$order_id', '$comment')";
              */
 
             // update comment in database
