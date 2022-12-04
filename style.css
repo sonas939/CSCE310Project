@@ -1,4 +1,13 @@
-.navbar-expand-lg {
-    padding-right: 3rem;
-    padding-left: 3rem;
+#cart_count {
+    text-align: center;
+    padding: 0 0.9rem 0.1rem 0.9rem;
+    border-radius: 3rem;
+}
+
+.shopping-cart{
+    padding:5% 0;
+}
+
+.cart-items + .cart-items {
+    padding: 2% 0;
 }
