@@ -2,7 +2,7 @@
     function component($productname, $productdesc, $productprice, $productid) {
         $element= '
         <div class="col-md-3 col-sm-6 my-3 my-md-0">
-                    <form action="index.php" method="post">
+                    <form action="order.php" method="post">
                         <div class="card shadow">
                             <div class="card-body">
                                 <h5 class="cart-title">'.$productname.'</h5>

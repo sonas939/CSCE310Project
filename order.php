@@ -11,7 +11,7 @@
 
             if(in_array($_POST['product_id'], $item_array_id)){
                 echo "<script>alert('Product is already added in the cart!')</script>";
-                echo "<script>window.location = 'index.php'</script>";
+                echo "<script>window.location = 'order.php'</script>";
             } else {
                $count = count($_SESSION['cart']);
                $item_array = array(
