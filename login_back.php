@@ -3,8 +3,6 @@
 <body>
 
   <!-- Written by Nathanael Goza and Nathan Groeschel -->
-
-  <!-- CREATE VIEW `view_login` AS SELECT username, password, profile_id, user_type FROM profiles; -->
   <?php
 
   session_start();

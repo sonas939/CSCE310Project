@@ -73,9 +73,14 @@ session_start();
                 
                 return $conn;
               }
-            if (isset($_POST['admin_back'])) {
-                // redirect to create account
-                header("Location: /admin.php");
+            if (isset($_POST['profile_back'])) {
+                // redirect to account profile page
+                if ($_SESSION['user_type'] == 3) {
+                    header("Location: /admin.php");
+                }
+                else{
+                    header("Location: /profile.php");
+                }
             } 
 
               // connect to database to get schedule view
@@ -104,10 +109,8 @@ session_start();
 
               $schedule = [];
 
-              // iterate through each profile, determine account type, display in table
+              // iterates through all schedule entries
               while ($row = mysqli_fetch_array($res)) {
-                // all admins must be employees
-
                 array_push($schedule, $row['order_id']);
                 if ($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2 or $_SESSION['profile_id'] == $row['profile_id']) {
                     echo "<tr>";
@@ -125,7 +128,7 @@ session_start();
                 }
               }
 
-              // end profile table
+              // end table
               echo "</tbody></table></div>";
 
 
@@ -133,7 +136,7 @@ session_start();
             ?>
             <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-                name = "admin_back">Return to Profile Page</button> 
+                name = "profile_back">Return to Profile Page</button> 
             </form>
             <!-- End Code from John Grimes -->
         </div>
