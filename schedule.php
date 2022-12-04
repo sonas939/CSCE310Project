@@ -94,7 +94,7 @@ session_start();
               $res = $conn->query($sql);
 
               // begin schedule table
-              echo '<form method="post" action="schedule.php">';
+              echo '<form action="schedule.php" method="post">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
@@ -103,6 +103,13 @@ session_start();
               echo "<th>" . "Pickup Start Time" . "</th>";
               echo "<th>" . "Pickup End Time" . "</th>";
               echo "<th>" . "Status" . "</th>";
+              if($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2){
+                echo "<th>" . "Fulfill?" . "</th>";
+                echo "<th>" . "Cancel?" . "</th>";
+              }
+              else{
+                echo "<th>" . "Cancel?" . "</th>";
+              }
               echo "</tr>";
               echo '</thead>';
               echo '<tbody>';
@@ -111,12 +118,17 @@ session_start();
 
               // iterates through all schedule entries
               while ($row = mysqli_fetch_array($res)) {
+                $cancel_order = $row['order_id'] . "-CANCEL";
+                $fulfill_order = $row['order_id'] . "-FULFILL";
+
                 array_push($schedule, $row['order_id']);
+
                 if ($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2 or $_SESSION['profile_id'] == $row['profile_id']) {
                     echo "<tr>";
                     echo "<td>" . $row['order_id'] . "</td>";
                     echo "<td>" . date("m/d/y g:i A", strtotime($row['start_time'])) . "</td>";
                     echo "<td>" . date("m/d/y g:i A", strtotime($row['end_time'])) . "</td>";
+                    //prints the status of the order
                     if ($row['order_status'] == 1) {
                         echo "<td>" . 'In Progress' . "</td>";
                     } elseif ($row['order_status'] == 2) {
@@ -124,13 +136,54 @@ session_start();
                     } else {
                         echo "<td>" . 'Canceled' . "</td>";
                     }
+
+                    //if user is an admin/employee, lets them mark orders as canceled or fulfilled
+                    if($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2){
+                        if ($row['order_status'] == 1) {
+                            echo "<td>" . '<input type="checkbox" id=' . $fulfill_order . ' name=' . $fulfill_order . "></td>";
+                            echo "<td>" . '<input type="checkbox" id=' . $cancel_order . ' name=' . $cancel_order . "></td>";
+                        }
+                        else{
+                            echo "<td>" . ' ' . "</td>";
+                            echo "<td>" . ' ' . "</td>";
+                        }
+                    }
+                    //if user is a customer, lets them cancel their order
+                    elseif($_SESSION['user_type'] == 1){
+                        if ($row['order_status'] == 1) {
+                            echo "<td>" . '<input type="checkbox" id=' . $cancel_order . ' name=' . $cancel_order . "></td>";
+                        }
+                        else{
+                            echo "<td>" . ' ' . "</td>";
+                        }
+                    }
                     echo "</tr>";
                 }
               }
 
               // end table
               echo "</tbody></table></div>";
+              echo '<button class="btn btn-primary btn-block" type="submit" name="update" value="update">Update Order Status</button>';
+              echo '</form>';
 
+            if (isset($_POST['update'])) {
+                foreach ($schedule as $order) {
+                    if (isset($_POST[$order . '-CANCEL'])) {
+                        # cancels a order
+                        print("test ");
+                        $sql = "UPDATE orders SET order_status=3 WHERE order_id = '$order'";
+                        $conn->query($sql);
+                    }
+                    elseif (isset($_POST[$order . '-FULFILL'])) {
+                        # marks an order as completed
+                        print("test ");
+                        $sql = "UPDATE orders SET order_status=2 WHERE order_id = '$order'";
+                        $conn->query($sql);
+                    }
+                }
+                $_POST = array();
+                header("Location: schedule.php");
+            }
 
               $conn->close();
             ?>
