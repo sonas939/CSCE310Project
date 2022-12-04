@@ -105,11 +105,8 @@ session_start();
               echo "<th>" . "Status" . "</th>";
               if($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2){
                 echo "<th>" . "Fulfill?" . "</th>";
-                echo "<th>" . "Cancel?" . "</th>";
               }
-              else{
-                echo "<th>" . "Cancel?" . "</th>";
-              }
+              echo "<th>" . "Cancel?" . "</th>";
               echo "</tr>";
               echo '</thead>';
               echo '<tbody>';
@@ -144,8 +141,8 @@ session_start();
                             echo "<td>" . '<input type="checkbox" id=' . $cancel_order . ' name=' . $cancel_order . "></td>";
                         }
                         else{
-                            echo "<td>" . ' ' . "</td>";
-                            echo "<td>" . ' ' . "</td>";
+                            echo "<td>" . 'N/A' . "</td>";
+                            echo "<td>" . 'N/A' . "</td>";
                         }
                     }
                     //if user is a customer, lets them cancel their order
@@ -154,7 +151,7 @@ session_start();
                             echo "<td>" . '<input type="checkbox" id=' . $cancel_order . ' name=' . $cancel_order . "></td>";
                         }
                         else{
-                            echo "<td>" . ' ' . "</td>";
+                            echo "<td>" . 'N/A' . "</td>";
                         }
                     }
                     echo "</tr>";
