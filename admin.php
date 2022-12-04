@@ -73,8 +73,6 @@
             
             <!-- Written by Nathan Groeschel -->
             <?php
-              // connect to db and query profile information
-              $conn = getDB();
               // use view_profiles view
               $sql = "SELECT * FROM view_profiles";
               $res = $conn->query($sql);
