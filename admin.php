@@ -20,14 +20,6 @@
         } else {
             header("Location: index.php");
         }
-
-        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
-            if ($_SESSION["user_type"] != 3) {
-                header("Location: profile.php");
-            }
-        } else {
-            header("Location: index.php");
-        }
          
         $profile_id = $_SESSION["profile_id"];
 
@@ -144,17 +136,14 @@
                 foreach ($uIDs as $id) {
                     if (isset($_POST[$id . '-ADM'])) {
                         # user is admin
-                        print("here ");
                         $sql = "UPDATE profiles SET user_type=3 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } elseif (isset($_POST[$id . '-EMP'])) {
                         # user is employee
-                        print("there ");
                         $sql = "UPDATE profiles SET user_type=2 WHERE profile_id='$id'";
                         $conn->query($sql);
                     } else {
                         # user is customer
-                        print("everywhere ");
                         $sql = "UPDATE profiles SET user_type=1 WHERE profile_id='$id'";
                         $conn->query($sql);
                     }
