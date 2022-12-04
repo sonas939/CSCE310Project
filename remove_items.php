@@ -70,11 +70,11 @@
                 return $conn;
               }
               if (isset($_POST['back'])) {
-                // redirect to create account
+                // redirect to item page
                 header("Location: /items.php");
             } 
 
-              // connect to db and query all our items
+              // connect to db and query all items again
               $conn = getDB();
               $sql = "SELECT * FROM `items`";
               $res = $conn->query($sql);
@@ -124,7 +124,7 @@
               if (isset($_POST['remove'])) {
                 foreach ($items as $item) {
                     if (isset($_POST[$item . '-DEL'])) {
-                        # if item marked to be deleted
+                        # unlists an item if its checked
                         print("test ");
                         $sql = "UPDATE items SET item_description='No longer available' WHERE item_id = '$item'";
                         $conn->query($sql);

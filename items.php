@@ -68,6 +68,19 @@
                 
                 return $conn;
               }
+              if (isset($_POST['add_item'])) {
+                // redirect to create account
+                header("Location: /add_items.php");
+            } 
+            if (isset($_POST['remove_items'])) {
+                // redirect to create account
+                header("Location: /remove_items.php");
+            } 
+            if (isset($_POST['admin_back'])) {
+                // redirect to create account
+                header("Location: /admin.php");
+            } 
+            
 
               // connect to db and query all our items
               $conn = getDB();
@@ -75,7 +88,7 @@
               $res = $conn->query($sql);
 
               // begin item table
-              echo '<form method="post" action="schedule.php">';
+              echo '<form method="post" action="items.php">';
               echo '<div class="container table-responsive">';
               echo '<table class="table table-bordered">';
               echo '<thead>';
@@ -114,8 +127,18 @@
 
               $conn->close();
             ?>
-            <p><a href="add_items.php">Add Items
-            <p><a href="remove_items.php">Remove Items
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "add_item">Add Item</button> 
+            </form>
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "remove_items">Remove Item</button> 
+            </form>
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "admin_back">Return to Profile Page</button> 
+            </form>
             <!-- End Code from John Grimes -->
         </div>
     </div>

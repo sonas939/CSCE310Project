@@ -32,7 +32,7 @@
 
 
   $conn = getDB();
-  $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
+  $sql = "SELECT * FROM `view_login` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
   $result = $conn->query($sql); 
   echo "<h2><b> Log In Limbo </b></h1><hr><br>";
 
@@ -49,7 +49,7 @@
       header('Location: admin.php');
     }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
       $conn->close();
-      header("Location: profile.php");
+      header("Location: order.php");
     }else{
       $conn->close();
       echo "<h2><b>usertype error</b></h1><hr><br>";   

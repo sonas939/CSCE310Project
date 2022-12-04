@@ -14,6 +14,14 @@
             }
         }
     }
+
+    if (isset($_POST['checkout'])) {
+        foreach ($_SESSION['cart'] as $key => $value) {
+            unset($_SESSION['cart'][$key]);
+        }
+        echo "<script>alert('You have checked-out!')</script>";
+        echo "<script>window.location='order.php'</script>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,10 +52,10 @@
                             $result = $conn->query($sql);
                             while ($row = mysqli_fetch_assoc($result)) {
                                 foreach($product_id as $id) {
-                                     if($row['item_id'] == $id) {
-                                        cartElement($row['item_name'],$row['item_price'],$row['item_description'],$id);
-                                        $total = $total + (int)$row['item_price'];
-                                     }
+                                    if($row['item_id'] == $id) {
+                                    cartElement($row['item_name'],$row['item_price'],$row['item_description'],$id);
+                                    $total = $total + $row['item_price'];
+                                    }
                                 }
                             }
                         } else {
@@ -55,6 +63,13 @@
                         }                       
                     ?>
                 </div>
+                <form action="cart.php" method="post">
+                    <div class="form-group">
+                    <h6>Enter any commments or special requests.</h6>
+                    <hr>
+                    <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                    </div>
+                </form>
             </div>
             <div class="col-md-3 offset-md-1 border rounded mt-5 bg-white h-25">
 
@@ -76,10 +91,15 @@
                         <h6>$<?php echo $total; ?></h6>
                     </div>
                 </div>
+                <div class="cart-checkout">
+                    <form action="cart.php" method="post">
+                        <button type="submit" class="btn btn-warning mx-2" name="checkout">Check Out</button>
+                    </form>
+                </div>
             </div>
         </div>
-
         </div>
+
     </div>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
