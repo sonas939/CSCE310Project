@@ -69,50 +69,47 @@
                 header("Location: /admin.php");
             } 
             
+                // connect to db and query all our items
+                $sql = "SELECT * FROM `items`";
+                $res = $conn->query($sql);
 
-              // query all our items
-              $sql = "SELECT * FROM `items`";
-              $res = $conn->query($sql);
+                // begin item table
+                echo '<form method="post" action="items.php">';
+                echo '<div class="container table-responsive">';
+                echo '<table class="table table-bordered">';
+                echo '<thead>';
+                echo "<tr>";
+                echo "<th>" . "Item ID" . "</th>";
+                echo "<th>" . "Quantity" . "</th>";
+                echo "<th>" . "Price (\$USD)" . "</th>";
+                echo "<th>" . "Name" . "</th>";
+                echo "<th>" . "Description" . "</th>";
+                echo "</tr>";
+                echo '</thead>';
+                echo '<tbody>';
 
-              // begin item table
-              echo '<form method="post" action="items.php">';
-              echo '<div class="container table-responsive">';
-              echo '<table class="table table-bordered">';
-              echo '<thead>';
-              echo "<tr>";
-              echo "<th>" . "Item ID" . "</th>";
-              echo "<th>" . "Quantity" . "</th>";
-              echo "<th>" . "Price (\$USD)" . "</th>";
-              echo "<th>" . "Name" . "</th>";
-              echo "<th>" . "Description" . "</th>";
-              echo "</tr>";
-              echo '</thead>';
-              echo '<tbody>';
+                $items = [];
 
-              $uIDs = [];
+                // iterate through each item and display it in a table
+                while ($row = mysqli_fetch_array($res)) {
 
-              // iterate through each item and display it in a table
-              while ($row = mysqli_fetch_array($res)) {
+                    array_push($items, $row['item_id']);
 
-                array_push($uIDs, $row['item_id']);
-
-                if ($row['item_description'] == "No longer available")
-                    ;
-                else{
-                    echo "<tr>";
-                    echo "<td>" . $row['item_id'] . "</td>";
-                    echo "<td>" . $row['item_inventory'] . "</td>";
-                    echo "<td>" . $row['item_price'] . "</td>";
-                    echo "<td>" . $row['item_name'] . "</td>";
-                    echo "<td>" . $row['item_description'] . "</td>";
-                    echo "</tr>";
+                    if ($row['item_description'] != "No longer available"){
+                        echo "<tr>";
+                        echo "<td>" . $row['item_id'] . "</td>";
+                        echo "<td>" . $row['item_inventory'] . "</td>";
+                        echo "<td>" . $row['item_price'] . "</td>";
+                        echo "<td>" . $row['item_name'] . "</td>";
+                        echo "<td>" . $row['item_description'] . "</td>";
+                        echo "</tr>";
+                    }
                 }
-              }
 
-              // end item table
-              echo "</tbody></table></div>";
+                // end item table
+                echo "</tbody></table></div>";
 
-              $conn->close();
+                $conn->close();
             ?>
             <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
