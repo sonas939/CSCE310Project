@@ -1,5 +1,7 @@
 <title>Build A Bread</title>
 
+<head>
+
 <style type="text/css">
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -49,24 +51,10 @@
     <?php
         session_start();
         
-        function getDB() {
-            $dbhost="localhost";
-            $dbuser="root";
-            $dbpass="root";
-            $dbname="build_a_bread";
-        
-            // Create a DB connection
-            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-            if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error . "\n");
-            }
-            
-            return $conn;
-        }
+        include 'connection.php';
          
         $profile_id = $_SESSION["profile_id"];
 
-        $conn = getDB();
         $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
         $results = $conn->query($sql)->fetch_assoc();
         $input_fname = $results['first_name'];
@@ -81,6 +69,8 @@
             header("Location: /update_account_front.php");
         }         
     ?>
+
+    <!-- Written by Nathanael Goza -->
     <div style="width: 100%;">
         <div style="width: 50%; height: 100%; float: left; border-style: solid; border-width: 2px; text-align: center"> 
             <h1>Profile</h1>
@@ -107,38 +97,7 @@
             <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 3</a><br>
         </div>
         
-
     </div>
-
-
-    
-
-<?php
-  // establish connection to SQL database
-  $db_host = 'localhost';
-  $db_user = 'root';
-  $db_password = 'root';
-  $db_db = "build_a_bread";
-  $db_port = 8889;
-
-  $mysqli = new mysqli(
-    $db_host,
-    $db_user,
-    $db_password,
-    $db_db
-  );
-	
-  if ($mysqli->connect_error) {
-    echo 'Errno: '.$mysqli->connect_errno;
-    echo '<br>';
-    echo 'Error: '.$mysqli->connect_error;
-    exit();
-  }
-
-  echo 'Success: A proper connection to MySQL was made.';
-
-  $mysqli->close();
-?>
 
 </body>
 </html>

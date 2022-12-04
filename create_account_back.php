@@ -6,20 +6,7 @@
   <?php
   session_start();
 
-  function getDB() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="build_a_bread";
-
-    // Create a DB connection
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error . "\n");
-    }
-    
-    return $conn;
-  }
+  include 'connection.php';
 
   $input_fname = $_POST["FirstName"];
   $input_lname = $_POST['LastName'];
@@ -28,8 +15,6 @@
   $input_email = $_POST['Email'];
   $input_phonenum = $_POST['PhoneNumber'];
   $usertype = 0;
-
-  $conn = getDB();
 
   // validate username
   $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\";";

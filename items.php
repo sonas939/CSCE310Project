@@ -51,23 +51,11 @@
 </head>
 <body>
         <div style="border-style: solid; border-width: 2px; text-align: center">
-            <!-- Written by John Grimes -->
+        <!-- Written by John Grimes -->
         <div class = "container">
             <?php 
-              function getDB() {
-                $dbhost="localhost";
-                $dbuser="root";
-                $dbpass="root";
-                $dbname="build_a_bread";
-            
-                // Create a DB connection
-                $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error . "\n");
-                }
-                
-                return $conn;
-              }
+              include 'connection.php';
+
               if (isset($_POST['add_item'])) {
                 // redirect to create account
                 header("Location: /add_items.php");
@@ -82,8 +70,7 @@
             } 
             
 
-              // connect to db and query all our items
-              $conn = getDB();
+              // query all our items
               $sql = "SELECT * FROM `items`";
               $res = $conn->query($sql);
 

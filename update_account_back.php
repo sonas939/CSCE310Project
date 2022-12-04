@@ -2,24 +2,11 @@
 <html>
 <body>
 
-  <!-- Written by Nathan Groeschel and Nathanael Goza -->
+  <!-- Written by Nathanael Goza -->
   <?php
   session_start();
 
-  function getDB() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="build_a_bread";
-
-    // Create a DB connection
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error . "\n");
-    }
-    
-    return $conn;
-  }
+  include 'connection.php';
 
   $editor_id =  $_SESSION['editor_id'];
 
@@ -31,8 +18,6 @@
   $input_email = $_POST['Email'];
   $input_phonenum = $_POST['PhoneNumber'];
   //$usertype = 0;
-
-  $conn = getDB();
 
   //Validation
 

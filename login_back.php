@@ -2,36 +2,18 @@
 <html>
 <body>
 
-  <!-- Written by Nathanael Goza and Nathan Groeschel -->
+  <!-- Written by Nathanael Goza -->
   <?php
 
   session_start();
 
-  function getDB() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="build_a_bread";
-
-    // Create a DB connection
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error . "\n");
-    }
-    
-    return $conn;
-  }
-
+  include 'connection.php';
 
   //gets username and password
   $input_uname= $_GET['username'];
   $input_pwd = $_GET['password'];
   $usertype = 0;
 
-
-
-
-  $conn = getDB();
   $sql = "SELECT * FROM `view_login` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
   $result = $conn->query($sql); 
   echo "<h2><b> Log In Limbo </b></h1><hr><br>";

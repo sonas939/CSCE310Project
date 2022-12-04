@@ -8,22 +8,7 @@
     <?php
         session_start();
         
-        function getDB() {
-            $dbhost="localhost";
-            $dbuser="root";
-            $dbpass="root";
-            $dbname="build_a_bread";
-        
-            // Create a DB connection
-            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-            if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error . "\n");
-            }
-            
-            return $conn;
-        }
-
-        $conn = getDB();
+        include 'connection.php';
 
         // Written by Nathan Groeschel
         // hard-coded comment_id, needs to be replaced

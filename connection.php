@@ -1,4 +1,5 @@
 <?php
+    // Written by Sona Shah
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "root";

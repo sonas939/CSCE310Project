@@ -6,51 +6,6 @@ session_start();
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <!--
-    <style type="text/css">
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: .9em;
-            color: #000000;
-            background-color: #FFFFFF;
-            margin: 0;
-            padding: 10px 20px 20px 20px;
-        }
-
-        samp {
-            font-size: 1.3em;
-        }
-
-        a {
-            color: #000000;
-            background-color: #FFFFFF;
-        }
-
-        sup a {
-            text-decoration: none;
-        }
-
-        hr {
-            margin-left: 90px;
-            height: 1px;
-            color: #000000;
-            background-color: #000000;
-            border: none;
-        }
-
-        #logo {
-            margin-bottom: 10px;
-            margin-left: 28px;
-        }
-
-        .text {
-            width: 80%;
-            margin-left: 90px;
-            line-height: 140%;
-        }
-    </style>
-    -->
-
 </head>
 
 <body>
@@ -59,20 +14,8 @@ session_start();
             
             <!-- Written by John Grimes -->
             <?php
-              function getDB() {
-                $dbhost="localhost";
-                $dbuser="root";
-                $dbpass="root";
-                $dbname="build_a_bread";
-            
-                // Create a DB connection
-                $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error . "\n");
-                }
-                
-                return $conn;
-              }
+            include 'connection.php';
+
             if (isset($_POST['profile_back'])) {
                 // redirect to account profile page
                 if ($_SESSION['user_type'] == 3) {
@@ -84,7 +27,6 @@ session_start();
             } 
 
               // connect to database to get schedule view
-              $conn = getDB();
               $sql = "SELECT * FROM `view_schedules`";
               /*CREATE VIEW `view_schedules` AS
 	                SELECT A.order_id, start_time, end_time, A.order_status, A.profile_id

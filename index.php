@@ -3,13 +3,7 @@
    session_start();
 ?>
 
-<?
-   // error_reporting(E_ALL);
-   // ini_set("display_errors", 1);
-?>
-
 <html lang = "en">
-   
    <head>
       <title>Build-A-Bread</title>
       <link href = "css/bootstrap.min.css" rel = "stylesheet">
@@ -73,6 +67,7 @@
       
    </head>
 	
+   <!-- Written by Nathanael Goza -->
    <body>
       <h1>Welcome to Build-A-Bread</h1> 
       <div class = "container form-signin">
@@ -83,11 +78,7 @@
             if (isset($_POST['create_account'])) {
                // redirect to create account
                header("Location: /create_account_front.php");
-            }
-            elseif (isset($_POST['edit_account'])) {
-               // redirect to create account
-               header("Location: /update_account_front.php");
-            }         
+            }    
          ?>
       </div> <!-- /container -->
       
@@ -108,9 +99,7 @@
          <!-- Edit and Create accounts: -->
          <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
          <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-               name = "create_account">Create Account</button> 
-         <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-            name = "edit_account">Edit Account</button> 
+               name = "create_account">Create Account</button>
          </form>
 
          <a href = "logout.php" tite = "Logout">Log Out</a>
@@ -121,6 +110,6 @@
       <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
       <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
       <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
-
    </body>
+   <!-- End code from Nathanael Goza -->
 </html>

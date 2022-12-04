@@ -12,27 +12,13 @@
   <title>Update Account</title>
 </head>
 
-<!-- Written by Nathan Groeschel -->
+<!-- Written by Nathanael Goza -->
 <body>
 <?php
 
 session_start();
 
-function getDB() {
-  $dbhost="localhost";
-  $dbuser="root";
-  $dbpass="root";
-  $dbname="build_a_bread";
-
-  // Create a DB connection
-  $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error . "\n");
-  }
-  
-  return $conn;
-}
-
+include 'connection.php';
 
 //gets username and password
 $input_profile_id = $_SESSION['profile_id'];
@@ -40,8 +26,6 @@ $input_profile_id = $_SESSION['profile_id'];
 
 echo $_SESSION['editor_id'];
 
-
-$conn = getDB();
 $sql = "SELECT * FROM `profiles` WHERE profile_id = \"$input_profile_id\";";
 $result = $conn->query($sql); 
 $result_row = $result->fetch_assoc();
@@ -60,7 +44,6 @@ $new_user_type = $result_row['user_type'];
 print_r($_SESSION);
 
 ?>
-
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #3EA055;">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class='navbar-nav mr-auto mt-2 mt-lg-0' style='padding-left: 30px;'>
@@ -137,6 +120,6 @@ print_r($_SESSION);
   }
   </script>
 </body>
-<!-- End Code from Nathan Groeschel -->
+<!-- End Code from Nathanael Goza -->
 
 </html>
