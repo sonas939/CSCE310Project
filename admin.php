@@ -52,7 +52,7 @@
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                 name = "edit_account">Edit Account</button> 
             </form>
-            <a href = "logout.php" tite = "Logout">Log Out</a>
+            <a href = "logout.php" title = "Logout">Log Out</a>
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
