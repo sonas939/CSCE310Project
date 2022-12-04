@@ -2,37 +2,19 @@
 <html>
 <body>
 
-  <!-- Written by Nathanael Goza and Nathan Groeschel -->
+  <!-- Written by Nathanael Goza -->
   <?php
 
   session_start();
 
-  function getDB() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="build_a_bread";
-
-    // Create a DB connection
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error . "\n");
-    }
-    
-    return $conn;
-  }
-
+  include 'connection.php';
 
   //gets username and password
   $input_uname= $_GET['username'];
   $input_pwd = $_GET['password'];
   $usertype = 0;
 
-
-
-
-  $conn = getDB();
-  $sql = "SELECT * FROM `profiles` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
+  $sql = "SELECT * FROM `view_login` WHERE username = \"$input_uname\" AND password = \"$input_pwd\";";
   $result = $conn->query($sql); 
   echo "<h2><b> Log In Limbo </b></h1><hr><br>";
 
@@ -49,7 +31,7 @@
       header('Location: admin.php');
     }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
       $conn->close();
-      header("Location: profile.php");
+      header("Location: order.php");
     }else{
       $conn->close();
       echo "<h2><b>usertype error</b></h1><hr><br>";   

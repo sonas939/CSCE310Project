@@ -3,75 +3,23 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <!--
-    <style type="text/css">
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: .9em;
-            color: #000000;
-            background-color: #FFFFFF;
-            margin: 0;
-            padding: 10px 20px 20px 20px;
-        }
-
-        samp {
-            font-size: 1.3em;
-        }
-
-        a {
-            color: #000000;
-            background-color: #FFFFFF;
-        }
-
-        sup a {
-            text-decoration: none;
-        }
-
-        hr {
-            margin-left: 90px;
-            height: 1px;
-            color: #000000;
-            background-color: #000000;
-            border: none;
-        }
-
-        #logo {
-            margin-bottom: 10px;
-            margin-left: 28px;
-        }
-
-        .text {
-            width: 80%;
-            margin-left: 90px;
-            line-height: 140%;
-        }
-    </style>
-    -->
-
 </head>
 <body>
         <div style="border-style: solid; border-width: 2px; text-align: center">
-            <!-- Written by John Grimes -->
+        
+        <!-- Written by John Grimes -->
         <div class = "container">
             <?php 
                 session_start();    
-              function getDB() {
-                $dbhost="localhost";
-                $dbuser="root";
-                $dbpass="root";
-                $dbname="build_a_bread";
-            
-                // Create a DB connection
-                $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error . "\n");
-                }
                 
-                return $conn;
-              }
+                include 'connection.php';
 
-              // connect to db and query all our items
-              $conn = getDB();
+                if (isset($_POST['back'])) {
+                    // redirect to item page
+                    header("Location: /items.php");
+                } 
+
+              // connect to db and query all items again
               $sql = "SELECT * FROM `items`";
               $res = $conn->query($sql);
 
@@ -120,7 +68,7 @@
               if (isset($_POST['remove'])) {
                 foreach ($items as $item) {
                     if (isset($_POST[$item . '-DEL'])) {
-                        # if item marked to be deleted
+                        # unlists an item if its checked
                         print("test ");
                         $sql = "UPDATE items SET item_description='No longer available' WHERE item_id = '$item'";
                         $conn->query($sql);
@@ -133,6 +81,10 @@
               }
               $conn->close();
             ?>
+            <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "back">Return to Inventory</button> 
+            </form>
             <!-- End Code from John Grimes -->
         </div>
     </div>

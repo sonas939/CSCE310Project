@@ -20,6 +20,7 @@
     <?php
     echo "<h2><b>Add New Item</b></h1><hr><br>";
     ?>
+    <!-- Mirrors create account form but it adds items to db -->
     <form method="POST" action="add_item_back.php">
       <div class="form-group row">
         <label for="Name" class="col-sm-4 col-form-label">Name</label>

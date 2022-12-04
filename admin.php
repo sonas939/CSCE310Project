@@ -4,76 +4,34 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <!--
-    <style type="text/css">
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: .9em;
-            color: #000000;
-            background-color: #FFFFFF;
-            margin: 0;
-            padding: 10px 20px 20px 20px;
-        }
-
-        samp {
-            font-size: 1.3em;
-        }
-
-        a {
-            color: #000000;
-            background-color: #FFFFFF;
-        }
-
-        sup a {
-            text-decoration: none;
-        }
-
-        hr {
-            margin-left: 90px;
-            height: 1px;
-            color: #000000;
-            background-color: #000000;
-            border: none;
-        }
-
-        #logo {
-            margin-bottom: 10px;
-            margin-left: 28px;
-        }
-
-        .text {
-            width: 80%;
-            margin-left: 90px;
-            line-height: 140%;
-        }
-    </style>
-    -->
-
 </head>
 
 <body>
     <?php
         session_start();
-        
-        function getDB() {
-            $dbhost="localhost";
-            $dbuser="root";
-            $dbpass="root";
-            $dbname="build_a_bread";
-        
-            // Create a DB connection
-            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-            if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error . "\n");
+
+        include 'connection.php';
+
+        // Written by Nathan Groeschel
+        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
+            if ($_SESSION["user_type"] != 3) {
+                header("Location: profile.php");
             }
-            
-            return $conn;
+        } else {
+            header("Location: index.php");
+        }
+
+        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
+            if ($_SESSION["user_type"] != 3) {
+                header("Location: profile.php");
+            }
+        } else {
+            header("Location: index.php");
         }
          
         $profile_id = $_SESSION["profile_id"];
 
-        $conn = getDB();
-        $sql = "SELECT * FROM `profiles` WHERE profile_id = \"$profile_id\";";
+        $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
         $results = $conn->query($sql)->fetch_assoc();
         $input_fname = $results['first_name'];
         $input_lname = $results['last_name'];
@@ -85,7 +43,8 @@
         if (isset($_POST['edit_account'])) {
             // redirect to create account
             header("Location: /update_account_front.php");
-        }         
+        }
+        // End code from Nathan Groeschel
     ?>
 
     <div style="width: 100%;">
@@ -101,7 +60,7 @@
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                 name = "edit_account">Edit Account</button> 
             </form>
-            <a href = "logout.php" tite = "Logout">Log Out</a>
+            <a href = "logout.php" title = "Logout">Log Out</a>
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
@@ -109,13 +68,11 @@
             <br><br>
             <hr style="margin-left: 0px">
             <br>
-            <a href=https://docs.google.com/spreadsheets/d/1DZ1idOCHZVBv5lmVg7m1fGqC-GKAzfz8uhBbppXkuN8/edit#gid=0>Users</a>
+            <a>Users</a>
             <br><br>
             
             <!-- Written by Nathan Groeschel -->
             <?php
-              // connect to db and query profile information
-              $conn = getDB();
               // use view_profiles view
               $sql = "SELECT * FROM view_profiles";
               $res = $conn->query($sql);
@@ -166,21 +123,21 @@
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 if ($row['user_type'] == 2) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 } elseif ($row['user_type'] == 3) {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . " checked></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . " checked></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . " checked></td>";
                 } else {
-                    echo "<td>" . '<input type="checkbox" name='. $empCheck . "></td>";
-                    echo "<td>" . '<input type="checkbox" name='. $admCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $empCheck . ' name='. $empCheck . "></td>";
+                    echo "<td>" . '<input type="checkbox" id='. $admCheck . ' name='. $admCheck . "></td>";
                 }
                 echo "</tr>";
               }
 
               // end profile table
               echo "</tbody></table></div>";
-              echo '<button class="btn btn-primary btn-block" type="submit" name="update">Update</button>';
+              echo '<button class="btn btn-primary btn-block" type="submit" id="update" name="update">Update</button>';
               echo '</form>';
 
               if (isset($_POST['update'])) {
@@ -220,10 +177,8 @@
             <a href=order.php>Order Now</a>
             <br><br>
             <hr style="margin-left: 0px">
-            <h1>Order History</h1>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 1</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 2</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 3</a><br>
+
+            <!-- Add Past Orders Here -->
         </div>
     </div> 
 
