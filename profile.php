@@ -1,4 +1,4 @@
-<title>Build A Bread</title>
+<title>Profile</title>
 
 <head>
 
@@ -53,8 +53,9 @@
         
         include 'connection.php';
          
-        $profile_id = $_SESSION["profile_id"];
 
+        $profile_id = $_SESSION["profile_id"];
+        require_once("header.php");
         $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
         $results = $conn->query($sql)->fetch_assoc();
         $input_fname = $results['first_name'];

@@ -31,7 +31,7 @@
       header('Location: admin.php');
     }else if(isset($_SESSION['user_type'])){                            //employee and customer portal
       $conn->close();
-      header("Location: profile.php");
+      header("Location: order.php");
     }else{
       $conn->close();
       echo "<h2><b>usertype error</b></h1><hr><br>";   
