@@ -53,6 +53,13 @@
         
         include 'connection.php';
          
+        if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
+            if ($_SESSION["user_type"] == 3) {
+                header("Location: admin.php");
+            }
+        } else {
+            header("Location: index.php");
+        }
 
         $profile_id = $_SESSION["profile_id"];
         require_once("header.php");
