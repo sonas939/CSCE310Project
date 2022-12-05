@@ -12,7 +12,7 @@ session_start();
         <div style="height: 100%; border-style: solid; border-width: 2px; text-align: center">
             <br>
             
-            <!-- Written by John Grimes -->
+            <!-- UI (Table) by John Grimes. SQL Commands by Sona Shah-->
             <?php
             include 'connection.php';
 

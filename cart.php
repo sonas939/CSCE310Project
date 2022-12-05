@@ -1,4 +1,5 @@
 <?php
+    //Written by Sona Shah
     session_start();
     require_once("connection.php");
     require_once("component.php");
@@ -29,6 +30,9 @@
         $profile_id = $_SESSION['profile_id'];
         $comment_field = $_REQUEST['comment'];
         
+        //End code from Sona Shah 
+
+        //Written by John Grimes
         //error checking for date
         $date = $_REQUEST['date'];
         $s_time = $_REQUEST['start-time'];
@@ -58,7 +62,9 @@
         if ($conn->query($sql) === FALSE) {
             echo "Failed to Check-Out";
         }
+        //End Code from John Grimes
 
+        //Written by Sona Shah
         //get last inserted schedule_id
         $sql = "SELECT schedule_id FROM Schedules ORDER BY schedule_id DESC LIMIT 1";
         $result = $conn->query($sql)->fetch_assoc();
@@ -80,7 +86,9 @@
         //add order to table
         $sql = "INSERT INTO Orders(price_total, schedule_id, profile_id, order_status) VALUES ('$total', '$schedule_id', '$profile_id', '1')";
         $conn->query($sql);
+        //End Code from Sona Shah
 
+        //Written by Nathan Groeschel and Nathanel Goza
         //get last inserted order_id
         $sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
         $result = $conn->query($sql)->fetch_assoc();
@@ -91,7 +99,9 @@
             $sql = "INSERT INTO Comments(comment_id, order_id, comment_field) VALUES (UUID(), '$order_id', '$comment_field')";
             $conn->query($sql);
         }
+        //End Cdoe by Nathan Groeschel and Nathanel Goza
 
+        //Written by Sona Shah
         //product_id defined above for total. adding each item to orderline
         foreach($product_id as $id) {
             //get item name using index
@@ -202,3 +212,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 </body>
 </html>
+<!--End Code from Sona Shah-->
