@@ -96,12 +96,24 @@
             }
         }
 
+        //product_id defined above for total. adding each item to orderline
+        foreach($product_id as $id) {
+            //get item name using index
+            $sql = "SELECT item_name FROM `Items` USE INDEX (index_items_id) WHERE item_id = \"$id\";";
+            $result = $conn->query($sql)->fetch_assoc();
+            $item_name = $result['item_name'];
+            
+            $sql = "INSERT INTO Order_Lines(item_id, order_id, item_name, quantity_ordered) VALUES ('$id', '$order_id', '$item_name', '1')";
+            $conn->query($sql);
+        }
+
+        //clear session
         foreach ($_SESSION['cart'] as $key => $value) {
             unset($_SESSION['cart'][$key]);
         }
 
-        //echo "<script>alert('You have checked-out!')</script>";
-        //echo "<script>window.location='order.php'</script>";
+        echo "<script>alert('You have checked-out!')</script>";
+        echo "<script>window.location='order.php'</script>";
     }
 ?>
 
