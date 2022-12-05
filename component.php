@@ -1,3 +1,5 @@
+<!--Written by Sona Shah-->
+
 <?php
     function component($productname, $productdesc, $productprice, $productid) {
         $element= '
@@ -50,3 +52,4 @@
         return is_object(DateTime::createFromFormat('h:i a', $time));
     }
 ?>
+<!--End code from Sona Shah-->
