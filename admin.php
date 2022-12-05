@@ -167,8 +167,9 @@
             <a href=order.php>Order Now</a>
             <br><br>
             <hr style="margin-left: 0px">
-            <h1>Order History</h1>
-            <a href=order_view.php>View Past Orders</a>
+            <a href=all_order_view.php>View All Orders</a>
+            <br><br>
+            <a href=order_view.php>View Your Past Orders</a>
         </div>
     </div> 
 
