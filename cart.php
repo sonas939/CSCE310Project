@@ -145,6 +145,7 @@
                     <h6>My Cart</h6>
                     <hr>
                     <?php
+                        //iterate through each item in cart and update total
                         $total=0;
                         $totalQuantity = 0;
                         if (isset($_SESSION['cart'])) {
