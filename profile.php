@@ -2,48 +2,7 @@
 
 <head>
 
-<style type="text/css">
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .9em;
-        color: #000000;
-        background-color: #FFFFFF;
-        margin: 0;
-        padding: 10px 20px 20px 20px;
-    }
-
-    samp {
-        font-size: 1.3em;
-    }
-
-    a {
-        color: #000000;
-        background-color: #FFFFFF;
-    }
-
-    sup a {
-        text-decoration: none;
-    }
-
-    hr {
-        margin-left: 90px;
-        height: 1px;
-        color: #000000;
-        background-color: #000000;
-        border: none;
-    }
-
-    #logo {
-        margin-bottom: 10px;
-        margin-left: 28px;
-    }
-
-    .text {
-        width: 80%;
-        margin-left: 90px;
-        line-height: 140%;
-    }
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 </head>
 
