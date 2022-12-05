@@ -8,8 +8,8 @@
    unset($_SESSION["editor_id"]);
    
    
-   session_unset();
+   session_unset();  //unsets all session variables
 
    echo 'You have cleaned session';
-   header('Refresh: 2; URL = index.php');
+   header('Refresh: 2; URL = index.php');  //returns to log in page
 ?>
