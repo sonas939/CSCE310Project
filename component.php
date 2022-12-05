@@ -42,4 +42,13 @@
                         </form>';
         echo $element;
     }
+
+    function validateDate($date, $format = 'Y-m-d'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    }
+
+    function isTimeValid($time) {
+        return is_object(DateTime::createFromFormat('h:i a', $time));
+    }
 ?>
