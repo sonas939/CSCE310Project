@@ -29,9 +29,9 @@ session_start();
               // connect to database to get schedule view
               $sql = "SELECT * FROM `view_schedules`";
               /*CREATE VIEW `view_schedules` AS
-	                SELECT A.order_id, start_time, end_time, A.order_status, A.profile_id
-		            FROM `orders` A, `schedules` B
-		            WHERE A.order_id = B.order_id
+                    SELECT A.order_id, B.start_time, B.end_time, A.order_status, A.profile_id
+                    FROM `orders` A, `schedules` B
+                    WHERE A.schedule_id = B.schedule_id;
             */
               $res = $conn->query($sql);
 
