@@ -1,4 +1,4 @@
-<title>Build A Bread</title>
+<title>View Schedule</title>
 <?php
 session_start();
 ?>

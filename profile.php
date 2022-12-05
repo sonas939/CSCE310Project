@@ -60,9 +60,7 @@
             <br><br>
             <hr style="margin-left: 0px">
             <h1>Order History</h1>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 1</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 2</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 3</a><br>
+            <a href=order_view.php>View Past Orders</a>
         </div>
         
     </div>
