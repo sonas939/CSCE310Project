@@ -7,22 +7,24 @@
 
     if (isset($_POST['add'])) {
         if(isset($_SESSION['cart'])) {
-            $item_array_id = array_column($_SESSION['cart'], "product_id");
+            $item_array_id = array_column($_SESSION['cart'], 'product_id');
 
             if(in_array($_POST['product_id'], $item_array_id)){
-                echo "<script>alert('Product is already added in the cart!')</script>";
-                echo "<script>window.location = 'order.php'</script>";
+                $index = array_search($_POST['product_id'],$item_array_id);
+                $_SESSION['cart'][$index]['quantity'] = $_SESSION['cart'][$index]['quantity'] + 1;
             } else {
                $count = count($_SESSION['cart']);
                $item_array = array(
-                    'product_id'=> $_POST['product_id']
+                    'product_id'=> $_POST['product_id'],
+                    'quantity' => 1,
                 );
                 $_SESSION['cart'][$count] = $item_array;
             }
         } else {
             //create new array if session has not be set
             $item_array = array(
-                'product_id'=> $_POST['product_id']
+                'product_id'=> $_POST['product_id'],
+                'quantity' => 1,
             );
 
             //create new session variable
