@@ -50,7 +50,9 @@
                 $sql = "SELECT * FROM `Items`"; 
                 $result = $conn->query($sql);
                 while ($row = mysqli_fetch_assoc($result)) {
-                    component($row['item_name'],$row['item_description'],$row['item_price'],$row['item_id']);
+                    if ($row['item_description'] != "No longer available") {
+                        component($row['item_name'],$row['item_description'],$row['item_price'],$row['item_id']);
+                    }
                 }
             ?>
         </div>
