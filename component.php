@@ -1,6 +1,7 @@
 <!--Written by Sona Shah-->
 
 <?php
+    //displays each item on order page
     function component($productname, $productdesc, $productprice, $productid) {
         $element= '
         <div class="col-md-3 col-sm-6 my-3 my-md-0">
@@ -22,6 +23,7 @@
         echo $element;
     }
 
+    //displays each item in cart
     function cartElement($productname,$productprice,$productdesc,$productid,$quantity) {
         $element = '<form action="cart.php?action=remove&id='.$productid.'" method="post" class="cart-items">
                             <div class="border rounded">

@@ -6,6 +6,7 @@
     require_once('connection.php');
     require_once('component.php');
 
+    //start cart session to add products to cart
     if (isset($_POST['add'])) {
         if(isset($_SESSION['cart'])) {
             $item_array_id = array_column($_SESSION['cart'], 'product_id');
@@ -46,6 +47,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!--Query all items from items to display on order page--->
     <?php require_once("header.php");?>
     <div class="container">
         <div class="row text-center py-5">

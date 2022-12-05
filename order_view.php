@@ -1,4 +1,5 @@
 <!--Written by Sona Shah-->
+<!--Code for viewing past orders. Checks if order status is 2 (meaning fufilled). If the order is fufilled, can view on table-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
