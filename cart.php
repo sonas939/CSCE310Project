@@ -88,7 +88,7 @@
         $conn->query($sql);
         //End Code from Sona Shah
 
-        //Written by Nathan Groeschel and Nathanel Goza
+        //Written by Nathan Groeschel
         //get last inserted order_id
         $sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
         $result = $conn->query($sql)->fetch_assoc();
@@ -99,7 +99,7 @@
             $sql = "INSERT INTO Comments(comment_id, order_id, comment_field) VALUES (UUID(), '$order_id', '$comment_field')";
             $conn->query($sql);
         }
-        //End Cdoe by Nathan Groeschel and Nathanel Goza
+        //End Cdoe by Nathan Groeschel
 
         //Written by Sona Shah
         //product_id defined above for total. adding each item to orderline

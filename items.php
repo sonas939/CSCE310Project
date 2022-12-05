@@ -9,21 +9,20 @@
         <!-- Written by John Grimes -->
         <div class = "container">
             <?php 
-              include 'connection.php';
+                include 'connection.php';
 
-            if (isset($_POST['add_item'])) {
-                // redirect to create account
-                header("Location: /add_items.php");
-            } 
-            if (isset($_POST['remove_items'])) {
-                // redirect to create account
-                header("Location: /remove_items.php");
-            } 
-            if (isset($_POST['admin_back'])) {
-                // redirect to create account
-                header("Location: /admin.php");
-            } 
-            
+                if (isset($_POST['add_item'])) {
+                    // redirect to create account
+                    header("Location: /add_items.php");
+                } 
+                if (isset($_POST['remove_items'])) {
+                    // redirect to create account
+                    header("Location: /remove_items.php");
+                } 
+                if (isset($_POST['admin_back'])) {
+                    // redirect to create account
+                    header("Location: /admin.php");
+                } 
                 // connect to db and query all our items
                 $sql = "SELECT * FROM `items`";
                 $res = $conn->query($sql);
