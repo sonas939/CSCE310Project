@@ -28,11 +28,6 @@
 
         $profile_id = $_SESSION['profile_id'];
         $comment_field = $_REQUEST['comment'];
-
-        if (strlen(trim($comment_field))) {
-            print_r($comment_field);
-            // add to database
-        }
         
         //error checking for date
         $date = $_REQUEST['date'];
@@ -68,7 +63,7 @@
         $sql = "SELECT schedule_id FROM Schedules ORDER BY schedule_id DESC LIMIT 1";
         $result = $conn->query($sql)->fetch_assoc();
         $schedule_id = $result['schedule_id'];
-        
+
         //get total for order table
         $total = 0;
         $product_id = array_column($_SESSION['cart'],'product_id'); 
@@ -92,6 +87,14 @@
         $sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
         $result = $conn->query($sql)->fetch_assoc();
         $order_id = $result['order_id'];
+
+        //add comments to database if there are comments
+        if (strlen(trim($comment_field))) {
+            $sql = "INSERT INTO Comments(comment_id, order_id, comment_field) VALUES (UUID(), '$order_id', '$comment_field')";
+            if ($conn->query($sql) === FALSE) {
+                echo "Failed to Check-Out";
+            }
+        }
 
         foreach ($_SESSION['cart'] as $key => $value) {
             unset($_SESSION['cart'][$key]);
