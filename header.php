@@ -18,8 +18,12 @@
                         <?php
 
                         if (isset($_SESSION['cart'])){
-                            $count = count($_SESSION['cart']);
-                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
+                            $quantity = 0;
+                            $quantity_sum = array_column($_SESSION['cart'], 'quantity');
+                            foreach($quantity_sum as $qs) {
+                                $quantity = $quantity + $qs;
+                            }
+                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$quantity</span>";
                         }else{
                             echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
                         }

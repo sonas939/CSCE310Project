@@ -2,48 +2,8 @@
 
 <head>
 
-<style type="text/css">
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .9em;
-        color: #000000;
-        background-color: #FFFFFF;
-        margin: 0;
-        padding: 10px 20px 20px 20px;
-    }
-
-    samp {
-        font-size: 1.3em;
-    }
-
-    a {
-        color: #000000;
-        background-color: #FFFFFF;
-    }
-
-    sup a {
-        text-decoration: none;
-    }
-
-    hr {
-        margin-left: 90px;
-        height: 1px;
-        color: #000000;
-        background-color: #000000;
-        border: none;
-    }
-
-    #logo {
-        margin-bottom: 10px;
-        margin-left: 28px;
-    }
-
-    .text {
-        width: 80%;
-        margin-left: 90px;
-        line-height: 140%;
-    }
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
 </head>
 
@@ -60,7 +20,7 @@
         } else {
             header("Location: index.php");
         }
-
+        
         $profile_id = $_SESSION["profile_id"];
         require_once("header.php");
         $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
@@ -102,9 +62,7 @@
             <br><br>
             <hr style="margin-left: 0px">
             <h1>Order History</h1>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 1</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 2</a><br>
-            <a href=https://www.grubhub.com/restaurant/houston-street-subs-233-houston-street-college-station/2432016>View Order 3</a><br>
+            <a href=order_view.php>View Past Orders</a>
         </div>
         
     </div>
