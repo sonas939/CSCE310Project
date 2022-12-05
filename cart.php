@@ -65,10 +65,10 @@
         }
 
         //get last inserted schedule_id
-        $sql = "SELECT LAST_INSERT_ID()";
-        $result = $conn->query($sql);
-        $schedule_id = $conn->insert_id;
-
+        $sql = "SELECT schedule_id FROM Schedules ORDER BY schedule_id DESC LIMIT 1";
+        $result = $conn->query($sql)->fetch_assoc();
+        $schedule_id = $result['schedule_id'];
+        
         //get total for order table
         $total = 0;
         $product_id = array_column($_SESSION['cart'],'product_id'); 
@@ -89,17 +89,16 @@
         }
 
         //get last inserted order_id
-        $sql = "SELECT LAST_INSERT_ID()";
-        $result = $conn->query($sql);
-        $order_id = $conn->insert_id;
-
+        $sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
+        $result = $conn->query($sql)->fetch_assoc();
+        $order_id = $result['order_id'];
 
         foreach ($_SESSION['cart'] as $key => $value) {
             unset($_SESSION['cart'][$key]);
         }
 
-        echo "<script>alert('You have checked-out!')</script>";
-        echo "<script>window.location='order.php'</script>";
+        //echo "<script>alert('You have checked-out!')</script>";
+        //echo "<script>window.location='order.php'</script>";
     }
 ?>
 
