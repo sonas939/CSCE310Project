@@ -9,18 +9,20 @@
 
 <body>
     <?php
-        session_start();
+        session_start();        // connect to database
         
         include 'connection.php';
-         
+        
+        //if user is an admin we send them to the admin view 
         if (isset($_SESSION["profile_id"]) && isset($_SESSION["user_type"])) {
             if ($_SESSION["user_type"] == 3) {
                 header("Location: admin.php");
             }
         } else {
-            header("Location: index.php");
+            header("Location: index.php");  //if not logged in we send the user back to index
         }
         
+        //gets the profile information of the user
         $profile_id = $_SESSION["profile_id"];
         require_once("header.php");
         $sql = "SELECT * FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profile_id\";";
@@ -41,18 +43,20 @@
     <!-- Written by Nathanael Goza -->
     <div style="width: 100%;">
         <div style="width: 50%; height: 100%; float: left; border-style: solid; border-width: 2px; text-align: center"> 
+            <!-- Displayes user information -->
             <h1>Profile</h1>
             <?php echo "<h2>User Name: $input_uname</h2>"; ?>
             <h2>Password: <?php echo $input_pwd; ?> </h2>
             <h2>Name: <?php echo $input_fname; ?> <?php echo $input_lname; ?> </h2>
             <h2>Email: <?php echo $input_email; ?> </h2>
             <h2>Phone Number: <?php echo $input_phonenum; ?> </h2>
-            <!-- Edit and Create accounts: -->
+            <!-- Edit Account Button -->
             <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
             <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                 name = "edit_account">Edit Account</button> 
             </form>
-            <a href = "logout.php" title = "Logout">Log Out</a>
+            <!-- Log out link -->
+            <a href = "logout.php" title = "Logout">Log Out</a> 
         </div>
         <div style="margin-left: 50%; height: 100%; border-style: solid; border-width: 2px; text-align: center"> 
             <br>

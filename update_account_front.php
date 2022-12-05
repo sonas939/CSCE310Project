@@ -16,21 +16,19 @@
 <body>
 <?php
 
-session_start();
+session_start();    //connect to database
 
 include 'connection.php';
 
-//gets username and password
+//gets profile_id from session variable
 $input_profile_id = $_SESSION['profile_id'];
-// $usertype = 0;
-
-echo $_SESSION['editor_id'];
-
+// SQL query to get info from user
 $sql = "SELECT * FROM `profiles` WHERE profile_id = \"$input_profile_id\";";
 $result = $conn->query($sql); 
 $result_row = $result->fetch_assoc();
 echo "<h2><b> PHP Update Area </b></h1><hr><br>";
 
+// Variables for the user info
 $new_profile_id = $result_row['profile_id'];
 $new_first_name = $result_row['first_name'];
 $new_last_name = $result_row['last_name'];
@@ -40,8 +38,6 @@ $new_email = $result_row['email'];
 $new_phone_number = $result_row['phone_number'];
 $new_user_type = $result_row['user_type'];
 
-//echo $_SESSION['new_last_name'];
-print_r($_SESSION);
 
 ?>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #3EA055;">
@@ -58,11 +54,12 @@ print_r($_SESSION);
     </div>
   </nav>
 
+  <!-- Form that intakes the changes for the updated account request -->
   <div class="container  col-lg-4 col-lg-offset-4 text-center" style="padding-top: 50px; text-align: center;">
     <?php
     echo "<h2><b>Update Account</b></h1><hr><br>";
     ?>
-    <form method="POST" action="update_account_back.php">
+    <form method="POST" action="update_account_back.php"> <!-- Sends form data to update_account_back.php to handle the updates -->
       <div class="form-group row">
         <?php echo "<label for=\"FirstName\" class=\"col-sm-4 col-form-label\">FirstName</label>"; ?>
         <div class="col-sm-8">

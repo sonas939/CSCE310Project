@@ -1,3 +1,4 @@
+<!-- Written by Nathanael Goza -->
 <title>Build A Bread</title>
 
 <head>
@@ -9,10 +10,7 @@
 <body>
     <?php
         session_start();
-
         include 'connection.php';    //Connects to the database
-
-        // Written by Nathanael Goza
     ?>
 
     <div>
@@ -56,27 +54,23 @@
             echo "<td>" . $row['comment_field'] . "</td>";
             echo "<td>" . '<input type="checkbox" id='. $delete_check . ' name='. $delete_check . "></td>";
             echo "</tr>";
+        }
+        echo "</tbody></table></div>";
+        echo '<button class="btn btn-primary btn-block" type="submit" id="updateCom" name="updateCom">Update</button>';
+        echo '</form>';
 
-
-            }
-            echo "</tbody></table></div>";
-            echo '<button class="btn btn-primary btn-block" type="submit" id="updateCom" name="updateCom">Update</button>';
-            echo '</form>';
-
-            if (isset($_POST['updateCom'])) {
-                foreach ($uIDs as $id) {
-                    if (isset($_POST[$id . '-del'])) {
-                        // # Post is marked and needs to be censored
-                        $sql = "UPDATE comments SET comment_field='This comment has been deemed unsafe by an admin' WHERE comment_id='$id'";
-                        $conn->query($sql);
-                    } 
-                }                        
-                # clear post and refresh
-                $_POST = array();
-                header('Location: admin_comments.php');
-
-            }
-
+        if (isset($_POST['updateCom'])) {
+            foreach ($uIDs as $id) {
+                if (isset($_POST[$id . '-del'])) {
+                    // # Post is marked and needs to be censored
+                    $sql = "UPDATE comments SET comment_field='This comment has been deemed unsafe by an admin' WHERE comment_id='$id'";
+                    $conn->query($sql);
+                } 
+            }                        
+            # clear post and refresh
+            $_POST = array();
+            header('Location: admin_comments.php');
+        }
         $conn->close();
         ?>
     </div>

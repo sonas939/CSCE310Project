@@ -75,36 +75,34 @@
          <?php
             $msg = '';
             
-            if (isset($_POST['create_account'])) {
-               // redirect to create account
+            if (isset($_POST['create_account'])) {               // redirect to create account when button is pressed
                header("Location: /create_account_front.php");
             }    
          ?>
-      </div> <!-- /container -->
+      </div> 
       
       <div class = "container">
       
          <!-- log in form START -->
          <form class = "form-signin" action="/login_back.php">
          <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
-         <!-- <label for="username">username:</label> -->
          <input type="text" id="username" name="username" class = "form-control" placeholder = "Username:" Required><br>
-         <!-- <label for="password">password:</label> -->
          <input type="password" id="password" name="password" class = "form-control" placeholder = "Password:" Required>
-         <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "login">Login</button>
-            
+         <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "login">Login</button>            
          </form>
          <!-- log in form END -->
       
-         <!-- Edit and Create accounts: -->
+         <!-- Create accounts Button -->
          <form class = "form-signin" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " method = "post">
          <button class = "btn btn-lg btn-primary btn-block" type = "submit"
                name = "create_account">Create Account</button>
          </form>
 
+         <!-- Log Out Link -->
          <a href = "logout.php" tite = "Logout">Log Out</a>
          
       </div> 
+      <!-- Images to make the website pretty -->
       <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
       <img src="/breadBox.jpg" width="280" height="125" title="Nichijou Bread" alt="Nichijou Bread" class="center"/>
       <img src="/loaf.png" width="280" height="125" title="lovely bread" alt="Loving bread" class="center"/>
