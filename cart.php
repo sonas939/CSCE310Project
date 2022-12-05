@@ -88,12 +88,18 @@
             echo "Failed to Check-Out";
         }
 
-        /*foreach ($_SESSION['cart'] as $key => $value) {
-            unset($_SESSION['cart'][$key]);
-        }*/
+        //get last inserted order_id
+        $sql = "SELECT LAST_INSERT_ID()";
+        $result = $conn->query($sql);
+        $order_id = $conn->insert_id;
 
-        //echo "<script>alert('You have checked-out!')</script>";
-        //echo "<script>window.location='order.php'</script>";
+
+        foreach ($_SESSION['cart'] as $key => $value) {
+            unset($_SESSION['cart'][$key]);
+        }
+
+        echo "<script>alert('You have checked-out!')</script>";
+        echo "<script>window.location='order.php'</script>";
     }
 ?>
 
