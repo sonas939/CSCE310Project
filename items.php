@@ -11,7 +11,7 @@
             <?php 
               include 'connection.php';
 
-              if (isset($_POST['add_item'])) {
+            if (isset($_POST['add_item'])) {
                 // redirect to create account
                 header("Location: /add_items.php");
             } 

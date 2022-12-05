@@ -42,6 +42,7 @@ session_start();
               echo '<thead>';
               echo "<tr>";
               echo "<th>" . "Order ID" . "</th>";
+              echo "<th>" . "Name" . "</th>";
               echo "<th>" . "Pickup Start Time" . "</th>";
               echo "<th>" . "Pickup End Time" . "</th>";
               echo "<th>" . "Status" . "</th>";
@@ -65,6 +66,10 @@ session_start();
                 if ($_SESSION['user_type'] == 3 or $_SESSION['user_type'] == 2 or $_SESSION['profile_id'] == $row['profile_id']) {
                     echo "<tr>";
                     echo "<td>" . $row['order_id'] . "</td>";
+                    $profileid = $row['profile_id'];
+                    $sql2 = "SELECT first_name, last_name FROM `profiles` USE INDEX (index_profile_id) WHERE profile_id = \"$profileid\";";
+                    $names = $conn->query($sql2)->fetch_assoc();
+                    echo "<td>" . $names['first_name'] . " " . $names['last_name'] ."</td>";
                     echo "<td>" . date("m/d/y g:i A", strtotime($row['start_time'])) . "</td>";
                     echo "<td>" . date("m/d/y g:i A", strtotime($row['end_time'])) . "</td>";
                     //prints the status of the order
