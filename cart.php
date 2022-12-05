@@ -79,9 +79,7 @@
 
         //add order to table
         $sql = "INSERT INTO Orders(price_total, schedule_id, profile_id, order_status) VALUES ('$total', '$schedule_id', '$profile_id', '1')";
-        if ($conn->query($sql) === FALSE) {
-            echo "Failed to Check-Out";
-        }
+        $conn->query($sql);
 
         //get last inserted order_id
         $sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
@@ -91,9 +89,7 @@
         //add comments to database if there are comments
         if (strlen(trim($comment_field))) {
             $sql = "INSERT INTO Comments(comment_id, order_id, comment_field) VALUES (UUID(), '$order_id', '$comment_field')";
-            if ($conn->query($sql) === FALSE) {
-                echo "Failed to Check-Out";
-            }
+            $conn->query($sql);
         }
 
         //product_id defined above for total. adding each item to orderline
@@ -105,9 +101,7 @@
             $index = array_search($id,$product_id);
             $quantity = $_SESSION['cart'][$index]['quantity'];
             $sql = "INSERT INTO Order_Lines(item_id, order_id, item_name, quantity_ordered) VALUES ('$id', '$order_id', '$item_name', '$quantity')";            
-            if ($conn->query($sql) === FALSE) {
-                echo "Failed to check-out";
-            }
+            $conn->query($sql);
         }
 
         //clear session
@@ -115,8 +109,8 @@
             unset($_SESSION['cart'][$key]);
         }
 
-        //echo "<script>alert('You have checked-out!')</script>";
-        //echo "<script>window.location='order.php'</script>";
+        echo "<script>alert('You have checked-out!')</script>";
+        echo "<script>window.location='order.php'</script>";
     }
 ?>
 
